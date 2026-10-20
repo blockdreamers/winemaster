@@ -125,3 +125,5 @@ button { font: inherit; color: inherit; }
 
 /* Illustration labels get a background halo so they stay legible where they cross a line. */
 .illo-text text { paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+/* Inverted labels sit on a filled box; a halo in their own colour would bloat the glyphs into blobs. */
+.illo-text .inv { stroke: none; }
