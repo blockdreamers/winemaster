@@ -1,0 +1,7 @@
+# Netlify builds the Astro site and serves the generated dist/ folder.
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
