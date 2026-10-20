@@ -1,0 +1,41 @@
+---
+// Solera system: three tiers of casks. Wine is drawn only from the bottom (oldest) tier,
+// which is topped up from the tier above, and so on; new wine enters at the top.
+interface Props { labels: { newWine: string; c2: string; c1: string; solera: string; bottle: string } }
+const { labels } = Astro.props;
+const rows = [
+  { y: 30, label: labels.c2 },
+  { y: 110, label: labels.c1 },
+  { y: 190, label: labels.solera },
+];
+const xs = [210, 300, 390];
+---
+<svg viewBox="0 0 640 300" role="img" aria-label={`${labels.newWine} → ${labels.c2} → ${labels.c1} → ${labels.solera} → ${labels.bottle}`} class="illo">
+  <defs>
+    <marker id="ch29-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    {rows.map((r) => xs.map((x) => (
+      <g>
+        <rect x={x} y={r.y} width="80" height="46" rx="20" />
+        <path d={`M${x + 22} ${r.y} V${r.y + 46} M${x + 58} ${r.y} V${r.y + 46}`} stroke-dasharray="2 3" />
+      </g>
+    )))}
+    <path d="M110 53 H200" marker-end="url(#ch29-arr)" />
+    <path d="M190 80 V106" marker-end="url(#ch29-arr)" />
+    <path d="M190 160 V186" marker-end="url(#ch29-arr)" />
+    <path d="M340 240 V262" marker-end="url(#ch29-arr)" />
+  </g>
+  <g class="illo-text">
+    <text x="20" y="58">{labels.newWine}</text>
+    {rows.map((r) => <text x="486" y={r.y + 28}>{r.label}</text>)}
+    <text x="340" y="288" text-anchor="middle">{labels.bottle}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+</style>

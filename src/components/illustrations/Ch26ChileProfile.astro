@@ -1,0 +1,42 @@
+---
+// West-to-east cross-section of central Chile: Pacific, coastal range, central valley, Andes.
+interface Props { labels: { ocean: string; current: string; coast: string; valley: string; andes: string; breeze: string; water: string } }
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 640 300" role="img" aria-label={`${labels.ocean}, ${labels.coast}, ${labels.valley}, ${labels.andes}`} class="illo">
+  <defs>
+    <marker id="ch26-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <!-- ocean -->
+    <path d="M10 230 H130" />
+    <path d="M16 244 q12 -6 24 0 t24 0 t24 0 t24 0" />
+    <!-- terrain profile: coast range, valley, Andes -->
+    <path d="M130 230 L170 170 L200 150 L230 175 L260 215 L380 222 L430 190 L480 110 L530 40 L570 70 L610 120 L630 160" />
+    <path d="M512 64 L530 40 L552 58" stroke-width="2.5" />
+    <path d="M10 262 H630" />
+    <!-- vines in valley -->
+    <path d="M290 216 v-12 M287 207 h6 M320 218 v-12 M317 209 h6 M350 219 v-12 M347 210 h6" />
+    <!-- sea breeze arrow -->
+    <path d="M60 140 Q200 100 300 180" marker-end="url(#ch26-arr)" stroke-dasharray="4 4" />
+    <!-- snowmelt water arrow -->
+    <path d="M500 100 Q430 200 372 214" marker-end="url(#ch26-arr)" />
+  </g>
+  <g class="illo-text">
+    <text x="70" y="292" text-anchor="middle">{labels.ocean}</text>
+    <text x="70" y="218" text-anchor="middle" class="small">{labels.current}</text>
+    <text x="200" y="292" text-anchor="middle">{labels.coast}</text>
+    <text x="320" y="292" text-anchor="middle">{labels.valley}</text>
+    <text x="530" y="292" text-anchor="middle">{labels.andes}</text>
+    <text x="150" y="98" text-anchor="middle" class="small">{labels.breeze}</text>
+    <text x="470" y="186" text-anchor="middle" class="small">{labels.water}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

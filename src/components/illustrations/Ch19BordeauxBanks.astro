@@ -1,0 +1,42 @@
+---
+// Schematic map of Bordeaux: Gironde estuary, Garonne and Dordogne, with the main districts.
+// Not to scale. Uses currentColor so it follows the theme.
+interface Props {
+  labels: {
+    ocean: string; gironde: string; garonne: string; dordogne: string; city: string;
+    medoc: string; graves: string; sauternes: string; e2m: string; right: string;
+    leftBank: string; rightBank: string;
+  };
+}
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 600 380" role="img" aria-label={`${labels.leftBank}: ${labels.medoc}, ${labels.graves}, ${labels.sauternes}. ${labels.rightBank}: ${labels.right}. ${labels.e2m}.`} class="illo">
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <path d="M40 10 C 30 120, 60 230, 40 370" stroke-dasharray="4 5" />
+    <path d="M110 30 C 170 90, 230 140, 300 190" stroke-width="6" />
+    <path d="M300 190 C 290 215, 280 230, 275 248 C 300 290, 360 320, 430 370" stroke-width="3" />
+    <path d="M300 190 C 360 175, 420 185, 470 172 C 510 162, 540 168, 590 160" stroke-width="3" />
+    <path d="M350 378 C 356 360, 362 345, 370 330" stroke-width="1.25" stroke-dasharray="2 3" />
+  </g>
+  <g fill="currentColor"><circle cx="275" cy="248" r="5" /></g>
+  <g class="illo-text">
+    <text x="56" y="360" class="small">{labels.ocean}</text>
+    <text x="158" y="112" class="small" transform="rotate(38 158 112)">{labels.gironde}</text>
+    <text x="330" y="284" class="small" transform="rotate(30 330 284)">{labels.garonne}</text>
+    <text x="510" y="152" class="small">{labels.dordogne}</text>
+    <text x="210" y="252" class="small">{labels.city}</text>
+    <text x="80" y="170">{labels.medoc}</text>
+    <text x="150" y="320">{labels.graves}</text>
+    <text x="285" y="368">{labels.sauternes}</text>
+    <text x="370" y="245">{labels.e2m}</text>
+    <text x="370" y="120">{labels.right}</text>
+    <text x="80" y="195" class="small">{labels.leftBank}</text>
+    <text x="370" y="142" class="small">{labels.rightBank}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 600px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

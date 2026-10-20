@@ -122,3 +122,6 @@ button { font: inherit; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 :lang(ja) .eyebrow, :lang(ja) .meta, :lang(zh) .eyebrow, :lang(zh) .meta { letter-spacing: 0.02em; }
+
+/* Illustration labels get a background halo so they stay legible where they cross a line. */
+.illo-text text { paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }

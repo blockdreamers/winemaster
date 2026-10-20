@@ -1,0 +1,35 @@
+---
+// Five tasting steps as a left-to-right flow (wraps to two rows on the viewBox).
+interface Props { steps: { title: string; note: string }[] }
+const { steps } = Astro.props;
+const w = 112;
+const gap = 14;
+---
+<svg viewBox="0 0 640 150" role="img" aria-label={steps.map((s) => s.title).join(' → ')} class="illo">
+  <defs>
+    <marker id="ch05-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    {steps.map((_, i) => <rect x={6 + i * (w + gap)} y="30" width={w} height="90" />)}
+    {steps.slice(0, -1).map((_, i) => (
+      <path d={`M${6 + i * (w + gap) + w + 1} 75 H${6 + (i + 1) * (w + gap) - 1}`} marker-end="url(#ch05-arr)" />
+    ))}
+  </g>
+  <g class="illo-text">
+    {steps.map((s, i) => (
+      <>
+        <text x={6 + i * (w + gap) + w / 2} y="22" text-anchor="middle" class="small">{i + 1}</text>
+        <text x={6 + i * (w + gap) + w / 2} y="72" text-anchor="middle">{s.title}</text>
+        <text x={6 + i * (w + gap) + w / 2} y="96" text-anchor="middle" class="small">{s.note}</text>
+      </>
+    ))}
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 12px; fill: var(--muted); }
+</style>

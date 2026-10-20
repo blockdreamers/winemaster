@@ -1,0 +1,53 @@
+---
+// Cross-section of a steep Mosel vineyard: slate slope above the river, direct and reflected sunlight.
+interface Props { labels: { sun: string; direct: string; reflect: string; slate: string; river: string; vines: string } }
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 640 300" role="img" aria-label={`${labels.vines}, ${labels.slate}, ${labels.river}, ${labels.direct}, ${labels.reflect}`} class="illo">
+  <defs>
+    <marker id="ch24-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <!-- sun -->
+    <circle cx="70" cy="60" r="22" />
+    <path d="M70 26 v-10 M70 94 v10 M36 60 h-10 M104 60 h10 M46 36 l-7 -7 M94 84 l7 7 M94 36 l7 -7 M46 84 l-7 7" />
+    <!-- slope surface -->
+    <path d="M250 262 L560 40 L640 40" />
+    <!-- slate layers (tilted strata) -->
+    <path d="M300 262 L560 76" stroke-dasharray="6 5" />
+    <path d="M350 262 L580 98" stroke-dasharray="6 5" />
+    <path d="M400 262 L610 112" stroke-dasharray="6 5" />
+    <path d="M450 262 L640 126" stroke-dasharray="6 5" />
+    <path d="M250 262 H640" />
+    <!-- vines on slope -->
+    <path d="M300 218 v-16 M296 206 h8" />
+    <path d="M350 182 v-16 M346 170 h8" />
+    <path d="M400 146 v-16 M396 134 h8" />
+    <path d="M450 110 v-16 M446 98 h8" />
+    <path d="M500 74 v-16 M496 62 h8" />
+    <!-- river -->
+    <path d="M20 262 H250" />
+    <path d="M40 274 q15 -6 30 0 t30 0 t30 0 t30 0 t30 0 t30 0" />
+    <!-- direct light -->
+    <path d="M100 76 L388 150" marker-end="url(#ch24-arr)" />
+    <!-- light hitting river and reflecting up the slope -->
+    <path d="M92 86 L180 258" />
+    <path d="M180 258 L322 200" marker-end="url(#ch24-arr)" stroke-dasharray="4 4" />
+  </g>
+  <g class="illo-text">
+    <text x="70" y="128" text-anchor="middle">{labels.sun}</text>
+    <text x="230" y="104" class="small">{labels.direct}</text>
+    <text x="196" y="226" class="small">{labels.reflect}</text>
+    <text x="135" y="296" text-anchor="middle">{labels.river}</text>
+    <text x="520" y="230" text-anchor="middle">{labels.slate}</text>
+    <text x="560" y="28" text-anchor="middle">{labels.vines}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

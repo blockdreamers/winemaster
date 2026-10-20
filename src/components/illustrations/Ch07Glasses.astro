@@ -1,0 +1,35 @@
+---
+// Three glass silhouettes: sparkling flute, white wine glass, red wine glass, with a fill line.
+interface Props { labels: { flute: string; white: string; red: string; fill: string } }
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 600 300" role="img" aria-label={`${labels.flute}, ${labels.white}, ${labels.red}`} class="illo">
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <!-- flute -->
+    <path d="M86 30 C82 90 84 140 100 160 C116 140 118 90 114 30" />
+    <path d="M100 160 V232 M76 236 H124" />
+    <!-- white -->
+    <path d="M262 50 C244 100 246 150 300 166 C354 150 356 100 338 50" />
+    <path d="M300 166 V232 M270 236 H330" />
+    <!-- red -->
+    <path d="M464 40 C420 90 420 160 500 172 C580 160 580 90 536 40" />
+    <path d="M500 172 V232 M466 236 H534" />
+  </g>
+  <g fill="none" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3 4">
+    <path d="M84 74 H116" />
+    <path d="M247 118 H353" />
+    <path d="M426 124 H574" />
+  </g>
+  <g class="illo-text">
+    <text x="100" y="268" text-anchor="middle">{labels.flute}</text>
+    <text x="300" y="268" text-anchor="middle">{labels.white}</text>
+    <text x="500" y="268" text-anchor="middle">{labels.red}</text>
+    <text x="300" y="292" text-anchor="middle" class="small">{labels.fill}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 600px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

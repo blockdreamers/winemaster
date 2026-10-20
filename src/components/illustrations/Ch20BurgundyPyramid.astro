@@ -1,0 +1,36 @@
+---
+// The four-level Burgundy quality pyramid, with an example label for each level.
+interface Props { tiers: { name: string; example: string }[] } // top (grand cru) to bottom (regional)
+const { tiers } = Astro.props;
+const bands = [20, 85, 150, 215, 280];
+const apex = { x: 190, y: 20 };
+const half = (y: number) => ((y - apex.y) / (280 - apex.y)) * 170;
+---
+<svg viewBox="0 0 640 300" role="img" aria-label={tiers.map((t) => `${t.name} (${t.example})`).join(', ')} class="illo">
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <path d={`M${apex.x} ${apex.y} L${apex.x - 170} 280 H${apex.x + 170} Z`} />
+    {bands.slice(1, 4).map((y) => <path d={`M${apex.x - half(y)} ${y} H${apex.x + half(y)}`} />)}
+    {tiers.map((_, i) => {
+      const y = (bands[i] + bands[i + 1]) / 2 + 6;
+      return <path d={`M${apex.x + half(y) + 8} ${y - 5} H372`} stroke-dasharray="2 4" />;
+    })}
+  </g>
+  <g fill="currentColor"><path d={`M${apex.x} ${apex.y} L${apex.x - half(85)} 85 H${apex.x + half(85)} Z`} /></g>
+  <g class="illo-text">
+    {tiers.map((t, i) => {
+      const y = (bands[i] + bands[i + 1]) / 2 + 6;
+      return (
+        <>
+          <text x="380" y={y - 4}>{t.name}</text>
+          <text x="380" y={y + 14} class="small">{t.example}</text>
+        </>
+      );
+    })}
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

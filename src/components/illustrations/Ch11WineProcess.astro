@@ -1,0 +1,49 @@
+---
+// White, rosé and red winemaking side by side. Steps marked `key` are where the
+// skins leave the juice, which is the main thing that separates the three.
+interface Step { t: string; key?: boolean }
+interface Column { title: string; steps: Step[] }
+interface Props { columns: Column[] }
+const { columns } = Astro.props;
+const colW = 190;
+const gap = (640 - 20 - colW * columns.length) / Math.max(columns.length - 1, 1);
+const pitch = 46;
+const boxH = 32;
+const top = 44;
+const maxSteps = Math.max(...columns.map((c) => c.steps.length));
+const height = top + maxSteps * pitch + 4;
+---
+<svg viewBox={`0 0 640 ${height}`} role="img" aria-label={columns.map((c) => `${c.title}: ${c.steps.map((s) => s.t).join(' → ')}`).join(' / ')} class="illo">
+  <defs>
+    <marker id="ch11-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  {columns.map((c, ci) => {
+    const x = 10 + ci * (colW + gap);
+    return (
+      <g>
+        <text x={x + colW / 2} y="24" text-anchor="middle" class="illo-text head">{c.title}</text>
+        {c.steps.map((s, si) => {
+          const y = top + si * pitch;
+          return (
+            <g>
+              <rect x={x} y={y} width={colW} height={boxH} fill={s.key ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.25" />
+              <text x={x + colW / 2} y={y + 21} text-anchor="middle" class={s.key ? 'illo-text inv' : 'illo-text'}>{s.t}</text>
+              {si < c.steps.length - 1 && (
+                <path d={`M${x + colW / 2} ${y + boxH + 1} V${y + pitch - 2}`} fill="none" stroke="currentColor" stroke-width="1.25" marker-end="url(#ch11-arr)" />
+              )}
+            </g>
+          );
+        })}
+      </g>
+    );
+  })}
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 14px var(--sans); fill: currentColor; }
+  .illo-text.head { font-size: 15px; font-weight: 700; }
+  .illo-text.inv { fill: var(--bg); }
+</style>
