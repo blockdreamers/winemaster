@@ -1,0 +1,36 @@
+---
+// A cool-to-warm climate arrow with three aroma boxes underneath.
+interface Props {
+  labels: { cool: string; moderate: string; warm: string; axis: string; coolNotes: string; moderateNotes: string; warmNotes: string };
+}
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 640 190" role="img" aria-label={`${labels.axis}: ${labels.cool} ${labels.coolNotes}, ${labels.moderate} ${labels.moderateNotes}, ${labels.warm} ${labels.warmNotes}`} class="illo">
+  <defs>
+    <marker id="ch14-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <path d="M20 40 H620" marker-end="url(#ch14-arr)" />
+    <path d="M110 34 V46 M320 34 V46 M530 34 V46" />
+    <rect x="20" y="80" width="180" height="90" stroke-dasharray="3 4" />
+    <rect x="230" y="80" width="180" height="90" />
+    <rect x="440" y="80" width="180" height="90" stroke-width="2" />
+  </g>
+  <g class="illo-text">
+    <text x="320" y="22" text-anchor="middle" class="small">{labels.axis}</text>
+    <text x="110" y="108" text-anchor="middle">{labels.cool}</text>
+    <text x="320" y="108" text-anchor="middle">{labels.moderate}</text>
+    <text x="530" y="108" text-anchor="middle">{labels.warm}</text>
+    <text x="110" y="142" text-anchor="middle" class="small">{labels.coolNotes}</text>
+    <text x="320" y="142" text-anchor="middle" class="small">{labels.moderateNotes}</text>
+    <text x="530" y="142" text-anchor="middle" class="small">{labels.warmNotes}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

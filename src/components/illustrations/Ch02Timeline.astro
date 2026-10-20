@@ -1,0 +1,30 @@
+---
+// Vertical timeline of early wine history. Years and captions come in as props.
+interface Props { items: { year: string; text: string }[] }
+const { items } = Astro.props;
+const step = 54;
+const h = items.length * step + 20;
+---
+<svg viewBox={`0 0 600 ${h}`} role="img" aria-label={items.map((i) => `${i.year} ${i.text}`).join(', ')} class="illo">
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <path d={`M150 20 V${h - 20}`} />
+    {items.map((_, idx) => <circle cx="150" cy={30 + idx * step} r="6" />)}
+  </g>
+  <g fill="currentColor">
+    <circle cx="150" cy="30" r="6" />
+  </g>
+  <g class="illo-text">
+    {items.map((i, idx) => (
+      <>
+        <text x="132" y={35 + idx * step} text-anchor="end" class="small">{i.year}</text>
+        <text x="172" y={35 + idx * step}>{i.text}</text>
+      </>
+    ))}
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 600px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>
