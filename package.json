@@ -1,0 +1,30 @@
+{
+  "name": "winemaster",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.1.0",
+    "@astrojs/preact": "^6.1.0",
+    "astro": "^7.4.1",
+    "maplibre-gl": "^6.15.0",
+    "preact": "^11.0.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "@types/node": "^26.6.5",
+    "pagefind": "^1.5.2",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  }
+}

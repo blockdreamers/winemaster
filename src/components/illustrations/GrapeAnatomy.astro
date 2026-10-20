@@ -1,0 +1,29 @@
+---
+// Line drawing of a grape berry in cross-section. Uses currentColor, so it follows the theme.
+interface Props { labels: { skin: string; pulp: string; seed: string; stem: string } }
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 560 300" role="img" aria-label={`${labels.skin}, ${labels.pulp}, ${labels.seed}, ${labels.stem}`} class="illo">
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <path d="M200 40 v38" />
+    <path d="M200 52 q-26 -6 -40 -22" />
+    <ellipse cx="200" cy="170" rx="92" ry="98" stroke-width="5" />
+    <ellipse cx="200" cy="170" rx="80" ry="86" stroke-dasharray="2 5" />
+    <path d="M182 150 q-14 22 0 46 q14 -24 0 -46z" />
+    <path d="M220 140 q-12 20 0 42 q12 -22 0 -42z" />
+    <path d="M300 60 H360" /><path d="M300 108 H360" /><path d="M280 175 H360" /><path d="M236 182 H250 L290 240 H360" />
+  </g>
+  <g fill="currentColor"><circle cx="292" cy="108" r="3" /><circle cx="270" cy="175" r="3" /><circle cx="225" cy="165" r="3" /><circle cx="206" cy="60" r="3" /></g>
+  <g fill="none" stroke="currentColor" stroke-width="1.25"><path d="M206 60 H300 M292 108 H300 M270 175 H280" /></g>
+  <g class="illo-text">
+    <text x="370" y="64">{labels.stem}</text>
+    <text x="370" y="112">{labels.skin}</text>
+    <text x="370" y="179">{labels.pulp}</text>
+    <text x="370" y="244">{labels.seed}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 560px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+</style>

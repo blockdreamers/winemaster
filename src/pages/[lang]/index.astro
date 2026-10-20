@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContinueLink from '../../components/ContinueLink';
+import StatusMark from '../../components/StatusMark';
+import { useT, type Lang } from '../../i18n/ui';
+import { chapters, parts, pick } from '../../data/curriculum';
+import { getCollection } from 'astro:content';
+import { slugOf } from '../../lib/content';
+import { langPaths } from '../../lib/paths';
+import { u } from '../../lib/url';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang);
+const written = new Set((await getCollection('chapters')).map((e) => slugOf(e.id)));
+const ordered = chapters.map((c) => ({ slug: c.slug, href: u(`/${lang}/learn/${c.slug}/`) }));
+---
+
+<Base lang={lang}>
+  <section class="wrap hero">
+    <p class="eyebrow">Wine · Curriculum · Wiki</p>
+    <h1>{t('site.tagline')}</h1>
+    <p class="lead">{t('home.lead')}</p>
+    <div class="btn-row">
+      <ContinueLink client:load chapters={ordered} startLabel={t('home.start')} continueLabel={t('home.continue')} />
+      <a class="btn" href={u(`/${lang}/wiki/`)}>{t('home.wiki')}</a>
+    </div>
+  </section>
+
+  <section class="wrap block how">
+    <h2>{t('home.how.title')}</h2>
+    <ol>
+      <li><span class="num">01</span><p>{t('home.how.1')}</p></li>
+      <li><span class="num">02</span><p>{t('home.how.2')}</p></li>
+      <li><span class="num">03</span><p>{t('home.how.3')}</p></li>
+    </ol>
+  </section>
+
+  <section class="wrap block">
+    <div class="parts">
+      {parts.map((p) => (
+        <div class="part">
+          <p class="eyebrow">{t('learn.part')} {p.n}</p>
+          <h3>{pick(p.title, lang)}</h3>
+          <ul class="mini">
+            {chapters.filter((c) => c.part === p.n).map((c) => (
+              <li class={written.has(c.slug) ? '' : 'soon'}>
+                <StatusMark client:idle chapter={c.slug} labels={{ done: t('status.done'), progress: t('status.progress') }} />
+                <a href={u(`/${lang}/learn/${c.slug}/`)}><span class="num">{String(c.n).padStart(2, '0')}</span> {pick(c.title, lang)}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-top: var(--s8); padding-bottom: var(--s8); display: grid; gap: var(--s5); }
+  @media (min-width: 720px) { .hero { padding-top: 128px; padding-bottom: var(--s9); } }
+  .hero h1 { max-width: 12em; }
+  .how ol { list-style: none; padding: 0; margin: var(--s6) 0 0; display: grid; gap: var(--s5); }
+  @media (min-width: 720px) { .how ol { grid-template-columns: repeat(3, 1fr); gap: var(--s6); } }
+  .how li { border-top: 1px solid var(--fg); padding-top: var(--s3); }
+  .how .num { font-size: 12px; color: var(--muted); }
+  .how p { margin: var(--s2) 0 0; }
+  .parts { display: grid; gap: var(--s7) var(--s6); }
+  @media (min-width: 720px) { .parts { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .parts { grid-template-columns: repeat(3, 1fr); } }
+  .part h3 { margin: var(--s2) 0 var(--s4); }
+  .mini { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--fg); font-size: 14px; }
+  .mini li { display: flex; align-items: center; gap: var(--s3); border-bottom: 1px solid var(--line); }
+  .mini a { flex: 1; padding: var(--s2) 0; text-decoration: none; }
+  .mini a:hover { text-decoration: underline; }
+  .mini .num { color: var(--muted); font-size: 12px; margin-right: var(--s2); }
+  .mini li.soon a { color: var(--muted); }
+</style>

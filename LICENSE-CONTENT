@@ -1,0 +1,15 @@
+WineMaster content license
+
+Unless otherwise noted, all written content, quiz questions, and original
+illustrations in this repository (including everything under content/ and
+original files under public/images/) are licensed under the
+
+  Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)
+  https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+Attribution: "WineMaster contributors, https://github.com/blockdreamers/winemaster"
+
+Third-party images and data keep their original licenses, recorded per file in
+data/images.yaml and shown on the site's credits page.
+
+Source code is licensed separately under the MIT License (see LICENSE).

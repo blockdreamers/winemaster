@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProgressPanel from '../../components/ProgressPanel';
+import { useT, type Lang } from '../../i18n/ui';
+import { chapters, pick } from '../../data/curriculum';
+import { langPaths } from '../../lib/paths';
+import { u } from '../../lib/url';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang);
+const list = chapters.map((c) => ({ slug: c.slug, n: c.n, title: pick(c.title, lang), href: u(`/${lang}/learn/${c.slug}/`) }));
+const labels = {
+  chapters: t('progress.chapters'), export: t('progress.export'), import: t('progress.import'), reset: t('progress.reset'),
+  resetConfirm: t('progress.resetConfirm'), best: t('quiz.best'), done: t('status.done'), progress: t('status.progress'),
+};
+---
+<Base lang={lang} title={t('progress.title')} path="progress/" section="progress">
+  <div class="wrap">
+    <header style="padding:64px 0 48px;display:grid;gap:16px">
+      <h1>{t('progress.title')}</h1>
+      <p class="lead">{t('progress.lead')}</p>
+    </header>
+    <ProgressPanel client:load chapters={list} labels={labels} />
+  </div>
+</Base>

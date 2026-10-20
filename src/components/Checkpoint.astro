@@ -1,0 +1,16 @@
+---
+import CheckpointIsland from './Checkpoint';
+import { useT, type Lang } from '../i18n/ui';
+
+interface Props { id: string; q: string; choices: string[]; answer: number; explain?: string }
+const props = Astro.props;
+const { chapter, lang } = Astro.locals as unknown as { chapter: string; lang: Lang };
+const t = useT(lang);
+---
+
+<CheckpointIsland
+  client:visible
+  chapter={chapter}
+  {...props}
+  labels={{ label: t('cp.label'), correct: t('cp.correct'), wrong: t('cp.wrong') }}
+/>

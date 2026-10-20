@@ -1,0 +1,180 @@
+---
+title: What is wine?
+lead: Wine is what happens when you crush grapes and leave them alone. Almost everything there is to learn about wine is hidden in that one sentence. Here is the whole journey, from a single grape to the glass.
+related:
+  regions: [bordeaux, champagne]
+  grapes: [cabernet-sauvignon, chardonnay]
+quiz:
+  - q: Which grape species makes most of the world's wine?
+    choices: [Vitis vinifera, Vitis labrusca, Vitis riparia, Vitis amurensis]
+    answer: 0
+    explain: Chardonnay, Cabernet Sauvignon, Pinot Noir and nearly every famous variety belong to Vitis vinifera.
+  - q: In alcoholic fermentation, yeast turns sugar into which two things?
+    choices: [Alcohol and carbon dioxide, Alcohol and oxygen, Acid and water, Tannin and alcohol]
+    answer: 0
+    explain: Sugar → alcohol + carbon dioxide (+ heat). Trap that CO₂ in a bottle and you get sparkling wine.
+  - q: Where does the colour of red wine mainly come from?
+    choices: [Grape skins, Grape pulp, Grape seeds, Oak barrels]
+    answer: 0
+    explain: The pulp and juice of most grapes are clear. Colour is extracted by soaking the skins in the juice.
+  - q: Can you make white wine from black grapes?
+    choices: [Yes, by separating the skins quickly, No, Only with a decolouring agent, Only if white grapes are blended in]
+    answer: 0
+    explain: Champagne's Blanc de Noirs is a clear wine made from Pinot Noir and Meunier.
+  - q: Which component makes your mouth feel dry and grippy?
+    choices: [Tannin, Acidity, Sugar, Alcohol]
+    answer: 0
+    explain: Tannin comes from skins, seeds, stems and oak. Think of strong black tea.
+  - q: What does "dry" mean on a wine?
+    choices: [Almost no sugar is left, High alcohol, Strong tannin, Long ageing]
+    answer: 0
+    explain: The yeast has eaten nearly all the sugar, so the wine does not taste sweet.
+  - q: Which element makes your mouth water and the wine taste fresh?
+    choices: [Acidity, Body, Tannin, Residual sugar]
+    answer: 0
+    explain: Think of lemon. The higher the acidity, the more your mouth waters.
+  - q: What do fortified wines such as Port and Sherry have in common?
+    choices: [Grape spirit is added, They are sparkling, Skins are never used, They are made from frozen grapes]
+    answer: 0
+    explain: Adding grape spirit raises the alcohol to around 15–22%.
+  - q: What best describes a wine's "body"?
+    choices: [Its weight in the mouth, The depth of its colour, The size of the bottle, The type of aromas]
+    answer: 0
+    explain: Like the difference between skimmed milk, whole milk and cream. More alcohol and sugar means more body.
+  - q: Which is NOT a reason grapes suit winemaking so well?
+    choices: [Ripe grapes keep no acid at all, Ripe grapes are full of sugar, Wild yeasts live on the skins, They are very juicy]
+    answer: 0
+    explain: Grapes keep plenty of acid as they ripen. That balance of sugar and acid is exactly what makes them special.
+---
+
+import GrapeAnatomy from '../../../src/components/illustrations/GrapeAnatomy.astro';
+import Fermentation from '../../../src/components/illustrations/Fermentation.astro';
+import WineColors from '../../../src/components/WineColors.astro';
+
+<Section id="definition" title="Wine is made from grapes">
+
+In one sentence, wine is **fermented grape juice**. Ferment apples and you get cider; ferment rice and you get sake. Ferment grapes and you get wine.
+
+Why grapes, though? Because they are close to the perfect fruit for making alcohol.
+
+- **Lots of sugar.** A ripe grape is more than 20% sugar by weight, and sugar is what becomes alcohol.
+- **Acidity that stays.** Most fruit loses its sourness as it ripens. Grapes keep a good deal of it, so sweetness and freshness stay in balance.
+- **Yeast is already there.** The dusty bloom on grape skins is home to wild yeasts. Crush the grapes and fermentation can start by itself.
+- **Plenty of juice.** No water needs to be added.
+
+Almost all the wine we drink is made from one European species, **Vitis vinifera**. Chardonnay, Cabernet Sauvignon and Pinot Noir are all **varieties** of it, the way Fuji, Gala and Granny Smith are varieties of apple.
+
+> Different varieties taste completely different, and the same variety changes again with where it grows. That is why there is always more to learn.
+
+</Section>
+
+<Section id="anatomy" title="Inside a single grape">
+
+A grape has four parts, and each gives something different to the wine.
+
+<figure>
+  <GrapeAnatomy labels={{ skin: 'Skin · colour, tannin, aroma', pulp: 'Pulp · sugar, acid, water', seed: 'Seeds · harsh tannin', stem: 'Stem · tannin (usually removed)' }} />
+  <figcaption>A grape in cross-section. A wine's character depends on which parts are extracted, and how much.</figcaption>
+</figure>
+
+| Part | Gives the wine | Remember |
+|---|---|---|
+| Skin | Colour, tannin, aroma compounds | Almost all of a red wine's colour and grip |
+| Pulp | Water, sugar, acid | Usually clear, which is why black grapes can make white wine |
+| Seeds | Bitter, coarse tannin | Pressing is gentle so seeds don't crack |
+| Stems | Green, stalky tannin | Mostly removed, though some producers keep a share on purpose |
+
+The key fact: **grape juice is almost always clear.** Red wine is red because the skins were soaked in the juice. Remove the skins straight away and even black grapes give a clear wine. Champagne's **Blanc de Noirs** is made exactly that way.
+
+</Section>
+
+<Checkpoint
+  id="cp-color"
+  q="Where does the colour of red wine mainly come from?"
+  choices={['The pulp', 'The skins', 'The seeds', 'Yeast produced during fermentation']}
+  answer={1}
+  explain="Pulp and juice are mostly clear; the pigments are in the skins."
+/>
+
+<Section id="fermentation" title="Fermentation: what yeast does">
+
+Leave crushed grapes alone and yeast feeds on the sugar, giving off **alcohol** and **carbon dioxide**. This is **alcoholic fermentation**.
+
+<figure>
+  <Fermentation labels={{ sugar: 'Grape sugar', yeast: 'Yeast', alcohol: 'Alcohol', co2: 'Carbon dioxide', heat: '+ heat' }} />
+  <figcaption>The basic equation. Yeast stops when the sugar runs out or the alcohol gets too high.</figcaption>
+</figure>
+
+Once you understand fermentation, many wine styles explain themselves.
+
+- **If the yeast eats all the sugar**, the wine is **dry**. Most table wine is dry.
+- **If fermentation stops with sugar left**, the wine is **sweet**.
+- **If the carbon dioxide is trapped in the bottle**, the wine is **sparkling**.
+- **If grape spirit is added during or after fermentation**, the wine is **fortified**, like Port and Sherry.
+
+Roughly 17 g of sugar per litre becomes 1% alcohol. So wines from ripe grapes in warm places tend to be higher in alcohol (14–15%), and wines from cool places lower (11–12.5%). Chapter 9, *Climate and terroir*, explains why.
+
+</Section>
+
+<Section id="structure" title="Five things that shape taste">
+
+When professionals describe a wine, the first thing they look at is not aroma but **structure**. Structure has five parts.
+
+| Element | What it is | How it feels |
+|---|---|---|
+| Sweetness | Sugar left after fermentation | Sweetness on the tip of the tongue |
+| Acidity | The grape's natural acids | Mouth-watering freshness. Think lemon |
+| Tannin | Compounds from skins, seeds and oak | Drying, grippy. Like strong black tea |
+| Alcohol | Ethanol from fermentation | Warmth at the back of the throat |
+| Body | The overall weight of all of the above | Skimmed milk, whole milk, cream |
+
+A good wine keeps these five in **balance**. Too much acid tastes sour, tannin alone tastes harsh, and alcohol alone tastes hot. You will come back to this table with every grape and region you study.
+
+</Section>
+
+<Checkpoint
+  id="cp-structure"
+  q="A wine leaves your mouth dry and grippy. Which element is strong?"
+  choices={['Acidity', 'Sweetness', 'Tannin', 'Alcohol']}
+  answer={2}
+  explain="Tannin binds to proteins in saliva, which makes the mouth feel dry."
+/>
+
+<Section id="styles" title="The big map of wine styles">
+
+The world's countless wines fall into three families.
+
+1. **Still wine** – ordinary wine with no bubbles: red, white and rosé.
+2. **Sparkling wine** – carbon dioxide dissolved in the wine: Champagne, Prosecco, Cava.
+3. **Fortified wine** – spirit added to raise the alcohol: Port, Sherry, Madeira.
+
+Still wines are then sorted by colour, which hints at the variety, skin contact and age.
+
+<WineColors items={[
+  { name: 'Lemon (white)', hex: '#efe7a6' },
+  { name: 'Gold (white)', hex: '#e3c565' },
+  { name: 'Salmon (rosé)', hex: '#f2a98f' },
+  { name: 'Purple (red)', hex: '#5b1a3a' },
+  { name: 'Ruby (red)', hex: '#8e1b2c' },
+  { name: 'Garnet (red)', hex: '#7a2a1e' },
+]} />
+
+- **White**: usually white grapes, skins removed quickly.
+- **Red**: black grapes fermented with their skins to extract colour and tannin.
+- **Rosé**: black grape skins left in the juice for a few hours to a day.
+
+Chapter 4, *Types of wine at a glance*, opens each family one at a time.
+
+</Section>
+
+<Section id="recap" title="Key points">
+
+- Wine is **fermented grape juice**, mostly from **Vitis vinifera** varieties.
+- Grapes bring **sugar, acid, yeast and juice**: everything alcohol needs.
+- **Skins** give colour and tannin; **pulp** gives sugar and acid. Most grape juice is clear.
+- Fermentation is **sugar → alcohol + carbon dioxide**. When it stops, and what is added, decides dry, sweet, sparkling or fortified.
+- Structure is **sweetness, acidity, tannin, alcohol and body**. Good wine keeps them in balance.
+
+Now try the quiz below. Score 80% or more to pass this chapter.
+
+</Section>

@@ -1,0 +1,83 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import RegionMap from '../../../../components/RegionMap';
+import GrapeProfile from '../../../../components/GrapeProfile.astro';
+import { langs, useT, type Lang } from '../../../../i18n/ui';
+import { localized, slugOf } from '../../../../lib/content';
+import { chapters, pick } from '../../../../data/curriculum';
+import { u } from '../../../../lib/url';
+
+export async function getStaticPaths() {
+  const slugs = [...new Set((await getCollection('grapes')).map((e) => slugOf(e.id)))];
+  return langs.flatMap((lang) => slugs.map((slug) => ({ params: { lang, slug }, props: { lang, slug } })));
+}
+
+const { lang, slug } = Astro.props as { lang: Lang; slug: string };
+const t = useT(lang);
+const { entry, fallback } = (await localized('grapes', slug, lang))!;
+const d = entry.data;
+const { Content } = await render(entry);
+const regions = (await Promise.all(d.regions.map((r) => localized('regions', r, lang)))).flatMap((r, i) =>
+  r ? [{ slug: d.regions[i], name: r.entry.data.name, coords: r.entry.data.coords }] : [],
+);
+const related = chapters.filter((c) => d.chapters.includes(c.n));
+---
+
+<Base lang={lang} title={d.name} description={d.summary} path={`wiki/grapes/${slug}/`} section="wiki" index={!fallback}>
+  <article class="wrap entry">
+    <header class="head">
+      <p class="eyebrow"><a href={u(`/${lang}/wiki/`)}>{t('wiki.title')}</a> / {t('wiki.grapes')}</p>
+      <h1>{d.name}</h1>
+      <p class="orig">{d.original}</p>
+      <p class="lead">{d.summary}</p>
+    </header>
+
+    <div class="cols">
+      <div class="main">
+        {fallback && <p class="note">{t('wiki.fallback')}</p>}
+        <div class="prose"><Content /></div>
+        {regions.length > 0 && (
+          <section class="where">
+            <p class="eyebrow">{t('wiki.grape.regions')}</p>
+            <RegionMap client:visible points={regions.map((r) => ({ name: r.name, coords: r.coords, href: u(`/${lang}/wiki/regions/${r.slug}/`) }))} zoom={6} label={t('wiki.map')} />
+          </section>
+        )}
+      </div>
+      <aside class="side" data-pagefind-ignore>
+        <p class="eyebrow">{t('wiki.grape.profile')}</p>
+        <GrapeProfile lang={lang} profile={d.profile} />
+        <dl class="facts">
+          <dt>{t('wiki.grape.color')}</dt><dd>{t(`color.${d.color}`)}</dd>
+          <dt>{t('wiki.grape.origin')}</dt><dd>{d.origin}</dd>
+          {d.aliases.length > 0 && <><dt>{t('wiki.grape.aliases')}</dt><dd>{d.aliases.join(', ')}</dd></>}
+          <dt>{t('wiki.grape.aromas')}</dt><dd>{d.aromas.join(' · ')}</dd>
+          <dt>{t('wiki.grape.regions')}</dt>
+          <dd><ul class="tags">{regions.map((r) => <li><a href={u(`/${lang}/wiki/regions/${r.slug}/`)}>{r.name}</a></li>)}</ul></dd>
+        </dl>
+        {related.length > 0 && (
+          <div class="rel">
+            <p class="eyebrow">{t('wiki.chapters')}</p>
+            <ul class="rows">
+              {related.map((c) => <li><a class="row" href={u(`/${lang}/learn/${c.slug}/`)}><span class="num">{String(c.n).padStart(2, '0')}</span><span class="row-title">{pick(c.title, lang)}</span><span /></a></li>)}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .head { padding: var(--s7) 0 var(--s6); display: grid; gap: var(--s3); }
+  .head .eyebrow a { text-decoration: none; }
+  .orig { font: 500 14px var(--mono); color: var(--muted); margin: 0; }
+  .cols { display: grid; gap: var(--s7); }
+  @media (min-width: 1024px) { .cols { grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s8); } .side { position: sticky; top: calc(var(--header) + var(--s5)); align-self: start; } }
+  @media (max-width: 1023px) { .side { order: -1; } }
+  .side { display: grid; gap: var(--s4); align-content: start; }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .where { margin-top: var(--s7); display: grid; gap: var(--s3); }
+  .rel { margin-top: var(--s4); display: grid; gap: var(--s3); }
+  .rel .row { grid-template-columns: 2.4em 1fr; padding: var(--s3) 0; font-size: 14px; }
+</style>

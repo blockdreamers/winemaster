@@ -1,0 +1,19 @@
+---
+import { u } from '../lib/url';
+const target = u('/ko/');
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>WineMaster</title>
+    <script is:inline define:vars={{ base: u('/') }}>
+      const pref = (navigator.languages || [navigator.language]).map((l) => l.slice(0, 2));
+      const lang = pref.find((l) => ['ko', 'en', 'ja', 'zh'].includes(l)) || 'ko';
+      location.replace(base + lang + '/');
+    </script>
+  </head>
+  <body><a href={target}>WineMaster</a></body>
+</html>

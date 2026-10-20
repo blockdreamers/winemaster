@@ -1,0 +1,57 @@
+---
+import Base from '../../../layouts/Base.astro';
+import StatusMark from '../../../components/StatusMark';
+import { useT, type Lang } from '../../../i18n/ui';
+import { chapters, parts, pick } from '../../../data/curriculum';
+import { getCollection } from 'astro:content';
+import { slugOf } from '../../../lib/content';
+import { langPaths } from '../../../lib/paths';
+import { u } from '../../../lib/url';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang);
+const written = new Set((await getCollection('chapters')).map((e) => slugOf(e.id)));
+const labels = { done: t('status.done'), progress: t('status.progress') };
+---
+
+<Base lang={lang} title={t('learn.title')} path="learn/" section="learn">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>{t('learn.title')}</h1>
+      <p class="lead">{t('learn.lead')}</p>
+    </header>
+    {parts.map((p) => (
+      <section class="part">
+        <div class="part-head">
+          <p class="eyebrow">{t('learn.part')} {p.n}</p>
+          <h2>{pick(p.title, lang)}</h2>
+        </div>
+        <ol class="rows">
+          {chapters.filter((c) => c.part === p.n).map((c) => (
+            <li>
+              <a class={`row ${written.has(c.slug) ? '' : 'soon'}`} href={u(`/${lang}/learn/${c.slug}/`)}>
+                <span class="num">{String(c.n).padStart(2, '0')}</span>
+                <span>
+                  <span class="row-title">{pick(c.title, lang)}</span>
+                  <span class="row-sub">{pick(c.summary, lang)}</span>
+                </span>
+                <span class="row-side">
+                  {written.has(c.slug) ? <>{c.minutes}{t('learn.minutes')} <StatusMark client:idle chapter={c.slug} labels={labels} /></> : t('learn.soon')}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .page-head { padding: var(--s8) 0 var(--s7); display: grid; gap: var(--s4); }
+  .part { display: grid; gap: var(--s4); padding: var(--s6) 0; }
+  @media (min-width: 900px) { .part { grid-template-columns: 280px 1fr; gap: var(--s6); padding: var(--s7) 0; } }
+  .part-head h2 { font-size: 22px; margin-top: var(--s2); }
+  .row-side { display: inline-flex; align-items: center; gap: var(--s2); }
+</style>

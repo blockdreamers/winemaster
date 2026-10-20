@@ -1,0 +1,82 @@
+/* Interactive pieces: section checks, checkpoints, quiz, map, search, progress. */
+
+.check {
+  display: inline-flex; align-items: center; gap: var(--s3); min-height: 44px; padding: 0 var(--s4) 0 var(--s3);
+  border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 14px; color: var(--muted);
+  transition: border-color var(--ease), color var(--ease);
+}
+.check:hover { border-color: var(--fg); color: var(--fg); }
+.check .box { width: 16px; height: 16px; border: 1px solid var(--fg); position: relative; }
+.check.on { border-color: var(--fg); color: var(--fg); }
+.check.on .box { background: var(--fg); }
+.check.on .box::after {
+  content: ''; position: absolute; left: 5px; top: 1px; width: 4px; height: 9px;
+  border: solid var(--bg); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+}
+
+.choices { list-style: none; margin: 0 0 var(--s4); padding: 0; display: grid; gap: var(--s2); }
+.choice {
+  width: 100%; display: grid; grid-template-columns: 1.6em 1fr; gap: var(--s3); align-items: baseline; text-align: left;
+  min-height: 48px; padding: var(--s3) var(--s4); border: 1px solid var(--line); background: var(--bg);
+  cursor: pointer; font-size: 15px; line-height: 1.5; transition: border-color var(--ease), background var(--ease), color var(--ease);
+}
+.choice .num { font-size: 12px; color: var(--muted); }
+.choice:hover:not([disabled]) { border-color: var(--fg); }
+.choice[disabled] { cursor: default; }
+.choice.picked { border-color: var(--fg); box-shadow: inset 0 0 0 1px var(--fg); }
+.choice.right { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.choice.right .num { color: var(--bg); }
+.choice.wrong {
+  border-color: var(--fg); color: var(--muted); text-decoration: line-through;
+  background: repeating-linear-gradient(135deg, transparent 0 6px, var(--wash) 6px 12px);
+}
+
+.cp { margin: var(--s7) 0; padding: var(--s5) 0 var(--s2); border-top: 1px solid var(--fg); border-bottom: 1px solid var(--line); }
+.cp-q { font-weight: 600; color: var(--fg); }
+.cp-result { font-size: 14px; color: var(--muted); }
+.cp-result strong { color: var(--fg); }
+
+.quiz { padding: var(--s5) 0; }
+.quiz-top { display: flex; align-items: center; gap: var(--s4); margin-bottom: var(--s4); }
+.quiz-track { flex: 1; height: 1px; background: var(--line); position: relative; }
+.quiz-track span { position: absolute; inset: -1px auto -1px 0; background: var(--fg); transition: width var(--ease); }
+.quiz-q { font: 600 20px/1.45 var(--serif); color: var(--fg); margin-bottom: var(--s5); }
+.quiz-explain { font-size: 14px; color: var(--muted); border-left: 2px solid var(--fg); padding-left: var(--s4); }
+.quiz-lead { color: var(--muted); }
+.quiz-score { font-size: 56px; line-height: 1; color: var(--fg); margin-bottom: var(--s3); }
+.quiz-verdict { font-weight: 600; color: var(--muted); }
+.quiz-verdict.pass { color: var(--fg); }
+
+.chapter-bar { position: sticky; top: var(--header); z-index: 40; height: 2px; background: var(--line); }
+.chapter-bar-fill { position: absolute; inset: 0; background: var(--fg); transform-origin: left; transition: transform 240ms ease; }
+.chapter-bar-text { position: absolute; right: var(--gutter); top: 6px; font-size: 11px; color: var(--muted); background: var(--bg); padding: 0 4px; }
+
+.map { margin: 0; position: relative; border: 1px solid var(--line); background: var(--wash); }
+.map-canvas { height: 320px; filter: grayscale(1) contrast(1.05); }
+@media (min-width: 720px) { .map-canvas { height: 420px; } }
+@media (prefers-color-scheme: dark) { .map-canvas { filter: grayscale(1) invert(0.92) contrast(0.9); } }
+.map-fallback { position: absolute; inset: 0; margin: 0; padding: var(--s5); list-style: none; font-size: 14px; }
+.map-pin { display: flex; align-items: center; gap: 6px; text-decoration: none; color: #000; }
+.map-pin i { width: 10px; height: 10px; background: #000; outline: 2px solid #fff; }
+.map-pin b { font: 600 12px/1 var(--sans); background: #fff; padding: 3px 5px; border: 1px solid #000; white-space: nowrap; }
+.maplibregl-ctrl-group { border-radius: 0 !important; box-shadow: none !important; border: 1px solid #000; }
+
+.search-input {
+  width: 100%; height: 56px; padding: 0 var(--s4); border: 0; border-bottom: 2px solid var(--fg); border-radius: 0;
+  background: transparent; color: var(--fg); font: 400 20px/1 var(--sans); outline: none; margin-bottom: var(--s5);
+  -webkit-appearance: none; appearance: none;
+}
+.search-input::placeholder { color: var(--muted); }
+.search-hit { display: block; padding: var(--s4) 0; text-decoration: none; }
+.search-hit mark { background: var(--fg); color: var(--bg); padding: 0 2px; }
+
+.progress-big { font-size: 72px; line-height: 1; color: var(--fg); margin: 0 0 var(--s2); }
+.progress-big span { color: var(--muted); font-size: 0.4em; }
+.progress-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin: var(--s5) 0 var(--s6); max-width: 420px; }
+.progress-grid .cell { aspect-ratio: 1; border: 1px solid var(--line); }
+.progress-grid .cell.progress { border-color: var(--fg); background: linear-gradient(90deg, var(--fg) 50%, transparent 50%); }
+.progress-grid .cell.done { background: var(--fg); border-color: var(--fg); }
+
+.prose .choices { padding-left: 0; }
+.prose .choices li { margin: 0; }
+.search-input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }

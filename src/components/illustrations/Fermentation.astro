@@ -1,0 +1,36 @@
+---
+// Sugar + yeast -> alcohol + carbon dioxide, as a plain flow diagram.
+interface Props { labels: { sugar: string; yeast: string; alcohol: string; co2: string; heat: string } }
+const { labels } = Astro.props;
+---
+<svg viewBox="0 0 640 170" role="img" aria-label={`${labels.sugar} + ${labels.yeast} → ${labels.alcohol} + ${labels.co2}`} class="illo">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="currentColor" stroke-width="1.5" />
+    </marker>
+  </defs>
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <rect x="10" y="50" width="130" height="70" />
+    <circle cx="225" cy="85" r="34" stroke-dasharray="3 4" />
+    <path d="M150 85 H185" marker-end="url(#arr)" />
+    <path d="M265 85 H330" marker-end="url(#arr)" />
+    <rect x="340" y="20" width="150" height="56" />
+    <rect x="340" y="94" width="150" height="56" />
+    <path d="M500 122 H540" marker-end="url(#arr)" stroke-dasharray="2 4" />
+  </g>
+  <g fill="currentColor"><rect x="340" y="20" width="150" height="56" /></g>
+  <g class="illo-text">
+    <text x="75" y="91" text-anchor="middle">{labels.sugar}</text>
+    <text x="225" y="91" text-anchor="middle">{labels.yeast}</text>
+    <text x="415" y="54" text-anchor="middle" class="inv">{labels.alcohol}</text>
+    <text x="415" y="128" text-anchor="middle">{labels.co2}</text>
+    <text x="548" y="127" class="small">{labels.heat}</text>
+  </g>
+</svg>
+
+<style>
+  .illo { width: 100%; max-width: 640px; color: var(--fg); }
+  .illo-text { font: 500 15px var(--sans); fill: currentColor; }
+  .illo-text .inv { fill: var(--bg); }
+  .illo-text .small { font-size: 13px; fill: var(--muted); }
+</style>

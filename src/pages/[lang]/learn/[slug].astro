@@ -1,0 +1,127 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Section from '../../../components/Section.astro';
+import Checkpoint from '../../../components/Checkpoint.astro';
+import Quiz from '../../../components/Quiz';
+import ChapterBar from '../../../components/ChapterBar';
+import { langs, useT, type Lang } from '../../../i18n/ui';
+import { chapters, parts, pick, type ChapterMeta } from '../../../data/curriculum';
+import { localized } from '../../../lib/content';
+import { u } from '../../../lib/url';
+
+export function getStaticPaths() {
+  return langs.flatMap((lang) => chapters.map((c) => ({ params: { lang, slug: c.slug }, props: { lang, meta: c } })));
+}
+
+const { lang, meta } = Astro.props as { lang: Lang; meta: ChapterMeta };
+const t = useT(lang);
+const found = await localized('chapters', meta.slug, lang);
+const idx = chapters.findIndex((c) => c.slug === meta.slug);
+const prev = chapters[idx - 1];
+const next = chapters[idx + 1];
+const part = parts.find((p) => p.n === meta.part)!;
+
+// Islands inside the MDX read the chapter and language from locals.
+Object.assign(Astro.locals, { chapter: meta.slug, lang });
+
+let Content: any = null;
+let sections: { id: string; title: string }[] = [];
+let regionNames: { slug: string; name: string }[] = [];
+let grapeNames: { slug: string; name: string }[] = [];
+if (found) {
+  ({ Content } = await render(found.entry));
+  sections = [...(found.entry.body ?? '').matchAll(/<Section\s+id="([^"]+)"\s+title="([^"]+)"/g)].map((m) => ({ id: m[1], title: m[2] }));
+  const rel = found.entry.data.related;
+  regionNames = (await Promise.all(rel.regions.map(async (s) => ({ slug: s, name: (await localized('regions', s, lang))?.entry.data.name ?? s }))));
+  grapeNames = (await Promise.all(rel.grapes.map(async (s) => ({ slug: s, name: (await localized('grapes', s, lang))?.entry.data.name ?? s }))));
+}
+const title = found?.entry.data.title ?? pick(meta.title, lang);
+const quizLabels = {
+  start: t('quiz.start'), check: t('quiz.check'), next: t('quiz.next'), finish: t('quiz.finish'),
+  passed: t('quiz.passed'), failed: t('quiz.failed'), retry: t('quiz.retry'), best: t('quiz.best'),
+  question: t('quiz.question'), lead: t('quiz.lead', { n: found?.entry.data.quiz.length ?? 0 }),
+};
+---
+
+<Base lang={lang} title={title} description={found?.entry.data.lead ?? pick(meta.summary, lang)} path={`learn/${meta.slug}/`} section="learn" index={!!found && !found.fallback}>
+  {found && <ChapterBar client:idle chapter={meta.slug} total={sections.length} label={t('chapter.sections')} />}
+  <div class="wrap layout">
+    <aside class="toc" data-pagefind-ignore>
+      <p class="eyebrow">{t('learn.part')} {part.n} · {pick(part.title, lang)}</p>
+      {sections.length > 0 && (
+        <ol>
+          {sections.map((s, i) => <li><a href={`#${s.id}`}><span class="num">{i + 1}</span>{s.title}</a></li>)}
+          {found!.entry.data.quiz.length > 0 && <li><a href="#quiz"><span class="num">Q</span>{t('quiz.title')}</a></li>}
+        </ol>
+      )}
+    </aside>
+
+    <article class="body">
+      <header class="ch-head">
+        <p class="eyebrow">{t('learn.chapter')} <span class="num">{String(meta.n).padStart(2, '0')}</span> · {meta.minutes}{t('learn.minutes')}</p>
+        <h1>{title}</h1>
+        <p class="lead">{found?.entry.data.lead ?? pick(meta.summary, lang)}</p>
+      </header>
+
+      {found?.fallback && <p class="note">{t('chapter.fallback')}</p>}
+
+      {found ? (
+        <div class="prose">
+          <Content components={{ Section, Checkpoint }} />
+        </div>
+      ) : (
+        <div class="note">
+          <strong>{t('chapter.soon.title')}</strong><br />{t('chapter.soon.body')}
+        </div>
+      )}
+
+      {found && found.entry.data.quiz.length > 0 && (
+        <section id="quiz" class="quiz-wrap">
+          <h2>{t('quiz.title')}</h2>
+          <Quiz client:visible chapter={meta.slug} questions={found.entry.data.quiz} labels={quizLabels} />
+        </section>
+      )}
+
+      {(regionNames.length > 0 || grapeNames.length > 0) && (
+        <section class="related">
+          <p class="eyebrow">{t('chapter.related')}</p>
+          <ul class="tags">
+            {regionNames.map((r) => <li><a href={u(`/${lang}/wiki/regions/${r.slug}/`)}>{r.name}</a></li>)}
+            {grapeNames.map((g) => <li><a href={u(`/${lang}/wiki/grapes/${g.slug}/`)}>{g.name}</a></li>)}
+          </ul>
+        </section>
+      )}
+
+      <nav class="pager" data-pagefind-ignore>
+        {prev ? <a href={u(`/${lang}/learn/${prev.slug}/`)}><span class="meta">← {t('chapter.prev')}</span>{pick(prev.title, lang)}</a> : <span />}
+        {next && <a class="next" href={u(`/${lang}/learn/${next.slug}/`)}><span class="meta">{t('chapter.next')} →</span>{pick(next.title, lang)}</a>}
+      </nav>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .layout { display: grid; gap: var(--s5); padding-top: var(--s7); }
+  @media (min-width: 1024px) { .layout { grid-template-columns: 220px minmax(0, 1fr); gap: var(--s8); padding-top: var(--s8); } }
+  .toc { font-size: 13px; }
+  .toc ol { display: none; }
+  @media (min-width: 1024px) {
+    .toc { position: sticky; top: calc(var(--header) + var(--s6)); align-self: start; }
+    .toc ol { display: block; list-style: none; padding: 0; margin: var(--s4) 0 0; border-top: 1px solid var(--fg); }
+    .toc li a { display: grid; grid-template-columns: 1.6em 1fr; padding: var(--s2) 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--muted); }
+    .toc li a:hover { color: var(--fg); }
+    .toc .num { font-size: 11px; }
+  }
+  .ch-head { display: grid; gap: var(--s4); margin-bottom: var(--s7); max-width: var(--measure); }
+  .body :global(.ch-section) { padding-bottom: var(--s5); }
+  .body :global(.ch-section > h2) { margin-top: var(--s8); }
+  .body :global(.ch-section:first-child > h2) { margin-top: 0; }
+  .body :global(.ch-section-end) { margin-top: var(--s5); }
+  .quiz-wrap { max-width: var(--measure); margin-top: var(--s8); padding-top: var(--s6); border-top: 2px solid var(--fg); }
+  .related { max-width: var(--measure); margin-top: var(--s7); display: grid; gap: var(--s3); }
+  .pager { max-width: var(--measure); margin-top: var(--s8); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); border-top: 1px solid var(--fg); }
+  .pager a { display: grid; gap: var(--s1); padding: var(--s4) 0; text-decoration: none; font-weight: 600; color: var(--fg); }
+  .pager a:hover { text-decoration: underline; }
+  .pager .next { text-align: right; }
+</style>

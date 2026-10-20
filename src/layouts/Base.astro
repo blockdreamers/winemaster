@@ -1,0 +1,137 @@
+---
+import '../styles/global.css';
+import '../styles/islands.css';
+import { languages, langs, useT, type Lang } from '../i18n/ui';
+import { u } from '../lib/url';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Path after the language segment, e.g. "learn/01-what-is-wine/". Used by the language switcher. */
+  path?: string;
+  section?: 'learn' | 'wiki' | 'search' | 'progress';
+  /** Lets Pagefind index this page. Off for listing and utility pages. */
+  index?: boolean;
+}
+
+const { lang, title, description, path = '', section, index = false } = Astro.props;
+const t = useT(lang);
+const fullTitle = title ? `${title} · WineMaster` : `WineMaster · ${t('site.tagline')}`;
+const nav = [
+  { key: 'learn', href: u(`/${lang}/learn/`), label: t('nav.learn') },
+  { key: 'wiki', href: u(`/${lang}/wiki/`), label: t('nav.wiki') },
+  { key: 'search', href: u(`/${lang}/search/`), label: t('nav.search') },
+  { key: 'progress', href: u(`/${lang}/progress/`), label: t('nav.progress') },
+] as const;
+---
+
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description ?? t('home.lead')} />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    {langs.map((l) => <link rel="alternate" hreflang={l} href={u(`/${l}/${path}`)} />)}
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Noto+Serif+KR:wght@600&display=swap" />
+  </head>
+  <body>
+    <a class="skip visually-hidden" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="logo" href={u(`/${lang}/`)}>WineMaster</a>
+        <nav class="nav" aria-label="Main">
+          {nav.map((n) => <a href={n.href} aria-current={section === n.key ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+        <details class="lang">
+          <summary aria-label="Language"><span class="num">{lang.toUpperCase()}</span></summary>
+          <ul>
+            {langs.map((l) => (
+              <li><a href={u(`/${l}/${path}`)} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined}>{languages[l]}</a></li>
+            ))}
+          </ul>
+        </details>
+        <details class="menu">
+          <summary aria-label={t('nav.menu')}><span class="burger" aria-hidden="true"></span></summary>
+          <nav aria-label="Mobile">
+            {nav.map((n) => <a href={n.href} aria-current={section === n.key ? 'page' : undefined}>{n.label}</a>)}
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="main" data-pagefind-body={index ? '' : undefined}>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <span class="logo">WineMaster</span>
+        <span>{t('footer.license')}</span>
+        <span>{t('footer.disclaimer')}</span>
+        <a href="https://github.com/blockdreamers/winemaster">GitHub</a>
+      </div>
+    </footer>
+
+    <script>
+      // Close open dropdowns when clicking elsewhere or pressing Escape.
+      const close = (except?: Element | null) =>
+        document.querySelectorAll('.site-header details[open]').forEach((d) => d !== except && d.removeAttribute('open'));
+      document.addEventListener('click', (e) => close((e.target as Element).closest('.site-header details')));
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && close());
+    </script>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50; height: var(--header);
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: saturate(1.2) blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar { height: 100%; display: flex; align-items: center; gap: var(--s5); }
+  .logo { font: 600 17px/1 var(--serif); letter-spacing: -0.02em; color: var(--fg); text-decoration: none; margin-right: auto; }
+  .nav { display: none; gap: var(--s5); font-size: 14px; }
+  .nav a, .menu nav a { text-decoration: none; color: var(--muted); }
+  .nav a:hover, .nav a[aria-current] { color: var(--fg); }
+  .nav a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
+  @media (min-width: 720px) { .nav { display: flex; } .menu { display: none; } }
+
+  details { position: relative; }
+  summary { list-style: none; cursor: pointer; display: grid; place-items: center; min-width: 44px; height: 44px; }
+  summary::-webkit-details-marker { display: none; }
+  .lang summary { font-size: 12px; color: var(--muted); }
+  .lang summary:hover { color: var(--fg); }
+  .lang ul {
+    position: absolute; right: 0; top: 100%; margin: 0; padding: var(--s2) 0; list-style: none; min-width: 160px;
+    background: var(--bg); border: 1px solid var(--fg);
+  }
+  .lang a { display: block; padding: var(--s2) var(--s4); text-decoration: none; font-size: 14px; }
+  .lang a:hover { background: var(--wash); }
+  .lang a[aria-current] { font-weight: 600; }
+
+  .burger, .burger::before, .burger::after { display: block; width: 18px; height: 1px; background: var(--fg); position: relative; transition: transform var(--ease); }
+  .burger::before, .burger::after { content: ''; position: absolute; left: 0; }
+  .burger::before { top: -6px; } .burger::after { top: 6px; }
+  .menu[open] .burger { background: transparent; }
+  .menu[open] .burger::before { transform: translateY(6px) rotate(45deg); }
+  .menu[open] .burger::after { transform: translateY(-6px) rotate(-45deg); }
+  .menu nav {
+    position: fixed; left: 0; right: 0; top: var(--header); bottom: 0;
+    background: var(--bg); padding: var(--s5) var(--gutter); display: flex; flex-direction: column;
+  }
+  .menu nav a { font: 600 28px/1.2 var(--serif); color: var(--fg); padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
+
+  .site-footer { border-top: 1px solid var(--line); margin-top: var(--s9); padding: var(--s6) 0 calc(var(--s6) + env(safe-area-inset-bottom)); }
+  .foot { display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); align-items: baseline; font-size: 13px; color: var(--muted); }
+  .foot .logo { margin-right: 0; font-size: 15px; }
+</style>

@@ -1,0 +1,70 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import RegionMap from '../../../../components/RegionMap';
+import { langs, useT, type Lang } from '../../../../i18n/ui';
+import { localized, slugOf } from '../../../../lib/content';
+import { chapters, pick } from '../../../../data/curriculum';
+import { u } from '../../../../lib/url';
+
+export async function getStaticPaths() {
+  const slugs = [...new Set((await getCollection('regions')).map((e) => slugOf(e.id)))];
+  return langs.flatMap((lang) => slugs.map((slug) => ({ params: { lang, slug }, props: { lang, slug } })));
+}
+
+const { lang, slug } = Astro.props as { lang: Lang; slug: string };
+const t = useT(lang);
+const { entry, fallback } = (await localized('regions', slug, lang))!;
+const d = entry.data;
+const { Content } = await render(entry);
+const grapes = await Promise.all(d.grapes.map(async (g) => ({ slug: g, name: (await localized('grapes', g, lang))?.entry.data.name ?? g })));
+const related = chapters.filter((c) => d.chapters.includes(c.n));
+---
+
+<Base lang={lang} title={d.name} description={d.summary} path={`wiki/regions/${slug}/`} section="wiki" index={!fallback}>
+  <article class="wrap entry">
+    <header class="head">
+      <p class="eyebrow"><a href={u(`/${lang}/wiki/`)}>{t('wiki.title')}</a> / {t('wiki.regions')}</p>
+      <h1>{d.name}</h1>
+      <p class="orig">{d.original}</p>
+      <p class="lead">{d.summary}</p>
+    </header>
+
+    <div class="cols">
+      <div class="main">
+        <RegionMap client:visible points={[{ name: d.name, coords: d.coords }]} center={d.coords} zoom={d.zoom} label={t('wiki.map')} />
+        {fallback && <p class="note" style="margin-top:24px">{t('wiki.fallback')}</p>}
+        <div class="prose"><Content /></div>
+      </div>
+      <aside class="side" data-pagefind-ignore>
+        <dl class="facts">
+          <dt>{t('wiki.region.country')}</dt><dd>{d.country}</dd>
+          <dt>{t('wiki.region.climate')}</dt><dd>{t(`climate.${d.climate}`)}</dd>
+          <dt>{t('wiki.region.grapes')}</dt>
+          <dd><ul class="tags">{grapes.map((g) => <li><a href={u(`/${lang}/wiki/grapes/${g.slug}/`)}>{g.name}</a></li>)}</ul></dd>
+          <dt>{t('wiki.region.styles')}</dt><dd>{d.styles.join(' · ')}</dd>
+        </dl>
+        {related.length > 0 && (
+          <div class="rel">
+            <p class="eyebrow">{t('wiki.chapters')}</p>
+            <ul class="rows">
+              {related.map((c) => <li><a class="row" href={u(`/${lang}/learn/${c.slug}/`)}><span class="num">{String(c.n).padStart(2, '0')}</span><span class="row-title">{pick(c.title, lang)}</span><span /></a></li>)}
+            </ul>
+          </div>
+        )}
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .head { padding: var(--s7) 0 var(--s6); display: grid; gap: var(--s3); }
+  .head .eyebrow a { text-decoration: none; }
+  .orig { font: 500 14px var(--mono); color: var(--muted); margin: 0; }
+  .cols { display: grid; gap: var(--s7); }
+  @media (min-width: 1024px) { .cols { grid-template-columns: minmax(0, 1fr) 300px; gap: var(--s8); } .side { position: sticky; top: calc(var(--header) + var(--s5)); align-self: start; } }
+  .prose { margin-top: var(--s6); }
+  .prose :global(h2:first-child) { margin-top: 0; }
+  .rel { margin-top: var(--s6); display: grid; gap: var(--s3); }
+  .rel .row { grid-template-columns: 2.4em 1fr; padding: var(--s3) 0; font-size: 14px; }
+</style>
