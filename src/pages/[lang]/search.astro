@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import Search from '../../components/Search';
+import { useT, type Lang } from '../../i18n/ui';
+import { langPaths } from '../../lib/paths';
+import { u } from '../../lib/url';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang);
+---
+<Base lang={lang} title={t('search.title')} path="search/" section="search">
+  <div class="wrap measure" style="padding-top:64px">
+    <h1 class="visually-hidden">{t('search.title')}</h1>
+    <Search client:load base={u('/')} placeholder={t('search.placeholder')} empty={t('search.empty')} devNote={t('search.devNote')} />
+  </div>
+</Base>

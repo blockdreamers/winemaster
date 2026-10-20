@@ -1,0 +1,17 @@
+---
+import SectionCheck from './SectionCheck';
+import { useT, type Lang } from '../i18n/ui';
+
+interface Props { id: string; title: string }
+const { id, title } = Astro.props;
+const { chapter, lang } = Astro.locals as unknown as { chapter: string; lang: Lang };
+const t = useT(lang);
+---
+
+<section class="ch-section" id={id} data-section>
+  <h2>{title}</h2>
+  <slot />
+  <div class="ch-section-end">
+    <SectionCheck client:visible chapter={chapter} id={id} label={t('chapter.read')} doneLabel={t('chapter.readDone')} />
+  </div>
+</section>

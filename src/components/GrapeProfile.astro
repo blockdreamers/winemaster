@@ -1,0 +1,23 @@
+---
+import { useT, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; profile: { body: number; acidity: number; tannin: number; alcohol: number } }
+const { lang, profile } = Astro.props;
+const t = useT(lang);
+const rows = (['body', 'acidity', 'tannin', 'alcohol'] as const).map((k) => ({ label: t(`profile.${k}`), v: profile[k] }));
+---
+<dl class="profile">
+  {rows.map((r) => (
+    <div>
+      <dt>{r.label}</dt>
+      <dd aria-label={`${r.v}/5`}>{[1, 2, 3, 4, 5].map((i) => <span class={i <= r.v ? 'on' : ''} />)}</dd>
+    </div>
+  ))}
+</dl>
+<style>
+  .profile { margin: 0; display: grid; gap: var(--s2); }
+  .profile div { display: grid; grid-template-columns: 6em 1fr; align-items: center; }
+  dt { font: 500 12px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  dd { margin: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; max-width: 200px; }
+  dd span { height: 8px; border: 1px solid var(--fg); }
+  dd span.on { background: var(--fg); }
+</style>

@@ -1,0 +1,80 @@
+---
+import Base from '../../../layouts/Base.astro';
+import RegionMap from '../../../components/RegionMap';
+import { useT, type Lang } from '../../../i18n/ui';
+import { listLocalized } from '../../../lib/content';
+import { langPaths } from '../../../lib/paths';
+import { u } from '../../../lib/url';
+
+export const getStaticPaths = langPaths;
+const { lang } = Astro.props as { lang: Lang };
+const t = useT(lang);
+const regions = await listLocalized('regions', lang);
+const grapes = await listLocalized('grapes', lang);
+const byCountry = Map.groupBy(regions, (r) => r.entry.data.country);
+const points = regions.map((r) => ({ name: r.entry.data.name, coords: r.entry.data.coords, href: u(`/${lang}/wiki/regions/${r.slug}/`) }));
+---
+
+<Base lang={lang} title={t('wiki.title')} path="wiki/" section="wiki">
+  <div class="wrap">
+    <header class="page-head">
+      <h1>{t('wiki.title')}</h1>
+      <p class="lead">{t('wiki.lead')}</p>
+    </header>
+
+    <RegionMap client:visible points={points} zoom={6} label={t('wiki.map')} />
+
+    <section class="block grid">
+      <h2>{t('wiki.regions')}</h2>
+      <div>
+        {[...byCountry].map(([country, list]) => (
+          <div class="group">
+            <p class="eyebrow">{country}</p>
+            <ul class="rows">
+              {list.map((r) => (
+                <li>
+                  <a class="row two" href={u(`/${lang}/wiki/regions/${r.slug}/`)}>
+                    <span><span class="row-title">{r.entry.data.name}</span><span class="row-sub">{r.entry.data.summary}</span></span>
+                    <span class="row-side">{r.entry.data.original}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="block grid">
+      <h2>{t('wiki.grapes')}</h2>
+      <div>
+        {(['red', 'white'] as const).map((color) => (
+          <div class="group">
+            <p class="eyebrow">{t(`wiki.grapes.${color}`)}</p>
+            <ul class="rows">
+              {grapes.filter((g) => g.entry.data.color === color).map((g) => (
+                <li>
+                  <a class="row two" href={u(`/${lang}/wiki/grapes/${g.slug}/`)}>
+                    <span><span class="row-title">{g.entry.data.name}</span><span class="row-sub">{g.entry.data.summary}</span></span>
+                    <span class="row-side">{g.entry.data.original}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page-head { padding: var(--s8) 0 var(--s6); display: grid; gap: var(--s4); }
+  .block { margin-top: var(--s7); }
+  .grid { display: grid; gap: var(--s5); }
+  @media (min-width: 900px) { .grid { grid-template-columns: 280px 1fr; gap: var(--s6); } }
+  .group + .group { margin-top: var(--s6); }
+  .group .eyebrow { margin-bottom: var(--s3); }
+  .row.two { grid-template-columns: 1fr auto; }
+  @media (max-width: 599px) { .row.two .row-side { display: none; } }
+</style>

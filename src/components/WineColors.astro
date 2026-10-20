@@ -1,0 +1,16 @@
+---
+// Colour swatches: the one place colour is allowed, because colour is the information.
+interface Props { items: { name: string; hex: string }[] }
+const { items } = Astro.props;
+---
+<ul class="swatches">
+  {items.map((i) => (
+    <li><span class="glass" style={`--c:${i.hex}`}></span><span>{i.name}</span></li>
+  ))}
+</ul>
+
+<style>
+  .swatches { list-style: none; padding: 0; margin: var(--s5) 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: var(--s4); font-size: 13px; }
+  .swatches li { display: grid; gap: var(--s2); }
+  .glass { display: block; aspect-ratio: 1; background: radial-gradient(circle at 50% 50%, var(--c) 0 45%, color-mix(in srgb, var(--c) 60%, white) 70%, var(--bg) 71%); border-bottom: 1px solid var(--line); }
+</style>

@@ -15,7 +15,22 @@ An open-source wine curriculum and searchable wine wiki. Korean first, with Engl
 
 ## 상태
 
-계획 단계입니다. 전체 계획은 [docs/PLAN.md](docs/PLAN.md)를 보세요.
+1차 골격이 동작합니다. 커리큘럼 30장 목차, 1장 본문(한국어·영어), 섹션 체크·확인 질문·챕터 퀴즈, 진도 저장, 위키 샘플(지역 4·품종 4), 지도, 검색이 들어 있습니다. 전체 계획은 [docs/PLAN.md](docs/PLAN.md)를 보세요.
+
+## 로컬 실행
+
+```bash
+corepack enable          # pnpm
+pnpm install
+pnpm dev                 # http://localhost:4321
+pnpm build && pnpm preview   # 검색 색인(Pagefind)까지 포함한 운영 빌드 확인
+```
+
+## 콘텐츠 쓰는 법
+
+- 챕터: `content/chapters/<lang>/<번호-슬러그>.mdx`. 본문은 `<Section id title>`으로 나누고, 섹션 사이에 `<Checkpoint>`를 넣고, 퀴즈는 frontmatter의 `quiz`에 씁니다.
+- 지역: `content/regions/<lang>/<slug>.mdx`, 품종: `content/grapes/<lang>/<slug>.mdx`. 서로 slug로 참조하면 링크와 지도가 자동으로 붙습니다.
+- 번역이 없는 언어는 한국어 원문을 안내 문구와 함께 보여 줍니다.
 
 ## 기술 스택
 
