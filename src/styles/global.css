@@ -125,3 +125,5 @@ button { font: inherit; color: inherit; }
 
 /* Illustration labels get a background halo so they stay legible where they cross a line. */
 .illo-text text { paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+/* Light text on a filled shape needs no halo: a background-coloured stroke would swallow it. */
+.illo-text .inv { stroke: none; }
