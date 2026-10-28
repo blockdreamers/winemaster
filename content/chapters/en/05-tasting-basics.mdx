@@ -1,0 +1,184 @@
+---
+title: How to taste
+lead: Tasting a wine is a little different from drinking it. You tilt the glass to look at the colour, smell it, map its structure in your mouth, then sum it up in a sentence. Anyone can do it once they learn the order, and the same wine starts telling you far more.
+related:
+  regions: [burgundy, marlborough]
+  grapes: [sauvignon-blanc, pinot-noir, cabernet-sauvignon]
+quiz:
+  - q: What is the right order for tasting?
+    choices: [Look → smell → taste → conclude, Taste → look → conclude → smell, Smell → taste → look → conclude, Conclude → look → taste → smell]
+    answer: 0
+    explain: Gather information with your eyes, nose and mouth in that order, then draw a conclusion at the end.
+  - q: Why look at a wine against white paper or a white tablecloth?
+    choices: [To judge colour and intensity accurately, To smell it better, To lower its temperature, To keep the glass clean]
+    answer: 0
+    explain: Tilting the glass over a white background makes it easy to compare the colour and depth at the core and the rim.
+  - q: How does the colour of a red wine usually change as it ages?
+    choices: [Purple → ruby → garnet → tawny (brownish), Garnet → purple → ruby, It turns ever deeper purple, It does not change]
+    answer: 0
+    explain: Reds lose their purple with age and gain brick and brown tints. Whites go the other way and deepen.
+  - q: What is the most important reason to swirl the glass?
+    choices: [To expose the wine to air and lift the aromas, To blow off the alcohol, To warm the wine, To mix in the sediment]
+    answer: 0
+    explain: As the wine spreads over the inside of the glass, more surface meets the air and more aroma is released.
+  - q: Vanilla and toast notes from oak ageing belong to which group?
+    choices: [Secondary aromas, Primary aromas, Tertiary aromas, Fault aromas]
+    answer: 0
+    explain: Aromas are split into primary (from the grape), secondary (from winemaking) and tertiary (from ageing). Oak, malolactic fermentation and lees are secondary.
+  - q: What do aromas such as mushroom, leather and dried fruit usually tell you?
+    choices: [Long ageing, A very young wine, A tank-method sparkling wine, A cool-climate white]
+    answer: 0
+    explain: These are tertiary aromas that develop during long ageing in bottle or barrel.
+  - q: Which is true about sweetness on the tongue and being "fruity"?
+    choices: [They are different. A wine can be very fruity and still dry, They are the same thing, A fruity wine is always sweet, You can only sense sweetness with your nose]
+    answer: 0
+    explain: Your nose senses ripe fruit aromas, your tongue senses actual sugar. Telling them apart is the first hurdle in tasting.
+  - q: What do we call the time aromas and flavours linger after you swallow or spit?
+    choices: [The finish, The body, The acidity, The aroma intensity]
+    answer: 0
+    explain: In general, the longer the finish, the higher the quality.
+  - q: Which is NOT one of the four common criteria for judging quality?
+    choices: [Price, Balance, Length of the finish, Complexity]
+    answer: 0
+    explain: Look at balance, length, intensity and complexity. Price does not always match quality.
+  - q: Which is true about spitting when you taste many wines?
+    choices: [It is normal practice, even for professionals, It is rude to the wine, It stops you tasting properly, It is only done with red wine]
+    answer: 0
+    explain: You can judge structure and finish after tasting thoroughly and spitting. It lets you compare many wines with a clear head.
+---
+
+import Ch05TastingSteps from '../../../src/components/illustrations/Ch05TastingSteps.astro';
+import WineColors from '../../../src/components/WineColors.astro';
+
+<Section id="why-steps" title="Drinking versus tasting">
+
+Most of the time, you can simply drink your wine. But if you want to remember wines, compare them or describe them to others, **tasting in a fixed order** helps enormously. Think of coffee cupping or tea tasting. Check the same things in the same order every time, and the differences between wines start to stand out.
+
+Tasting has five steps.
+
+<figure>
+  <Ch05TastingSteps steps={[
+    { title: 'Prepare', note: 'Glass · temperature · setting' },
+    { title: 'Look', note: 'Clarity · intensity · colour' },
+    { title: 'Smell', note: 'Intensity · aroma types' },
+    { title: 'Taste', note: 'Structure · flavour · finish' },
+    { title: 'Conclude', note: 'Quality · when to drink' },
+  ]} />
+  <figcaption>Gather information with eyes, nose and mouth in that order, then sum up.</figcaption>
+</figure>
+
+**Preparing** is simple. Pour no more than a third of a clean, odour-free glass, and taste somewhere bright, away from perfume or strong cooking smells. Hold the glass by the **stem**, not the bowl, so your hand does not warm the wine. Temperature and glass choice are covered in detail in chapter 7, "Storage, service, glasses and temperature".
+
+</Section>
+
+<Section id="look" title="1. Look: what colour tells you">
+
+Tilt the glass slightly over white paper or a tablecloth and check three things.
+
+- **Clarity**: is it clear or hazy? Haze can be a fault, or a sign the wine was deliberately left unfiltered.
+- **Intensity**: is the colour pale or deep? Seeing whether text shows through the glass makes this easy.
+- **Colour**: whites are lemon, gold or amber; rosés pink, salmon or orange; reds purple, ruby, garnet or tawny.
+
+<WineColors items={[
+  { name: 'Lemon (young white)', hex: '#efe7a6' },
+  { name: 'Gold', hex: '#e3c565' },
+  { name: 'Amber (aged white)', hex: '#c8893a' },
+  { name: 'Purple (young red)', hex: '#5b1a3a' },
+  { name: 'Garnet', hex: '#7a2a1e' },
+  { name: 'Tawny (aged red)', hex: '#9a5a32' },
+]} />
+
+Colour is a clue to grape and age. **Whites deepen with age, while reds fade and turn brownish.** The colour at the rim of the glass shows the change first. Thin-skinned grapes such as Pinot Noir are pale even when young, and thick-skinned ones such as Cabernet Sauvignon are deep.
+
+The streaks running down the inside of the glass (the wine's **legs**) mostly reflect alcohol and sugar, not quality, so don't read too much into them.
+
+</Section>
+
+<Section id="smell" title="2. Smell: three layers of aroma">
+
+Smell once without swirling, then **swirl** the glass and smell again. As the wine spreads over the glass and meets the air, far more aroma rises. Decide the **intensity** of your first impression (light, medium, pronounced), then look for what the aromas are.
+
+Wine aromas fall into three layers depending on where they come from.
+
+| Group | Where it comes from | Typical aromas |
+|---|---|---|
+| Primary | The grape itself and fermentation | Lemon, apple, peach, strawberry, blackcurrant, flowers, grass, pepper |
+| Secondary | Winemaking | Vanilla, toast and cedar from oak, butter from malolactic fermentation, bread and biscuit from lees |
+| Tertiary | Ageing | Dried fruit, honey, nuts, mushroom, leather, earth |
+
+Start by sorting broadly: is it fruit, flowers or wood? If it is apple, is it green or ripe apple? If it is a red, is the fruit red (strawberry, cherry) or black (blackberry, plum)? Making a habit of smelling fruit when you go shopping is better training than you might think.
+
+> Naming an aroma is not about getting the right answer, it is about recalling a memory. The more smells you know, the more you can find in a wine.
+
+</Section>
+
+<Checkpoint
+  id="cp-aroma"
+  q="If a Chardonnay smells of butter and vanilla, which group do these aromas most likely belong to?"
+  choices={['Primary (the grape itself)', 'Tertiary (long ageing)', 'Secondary (winemaking)', 'Fault aromas']}
+  answer={2}
+  explain="Butter comes from malolactic fermentation and vanilla from oak, both classic secondary aromas."
+/>
+
+<Section id="taste" title="3. Taste: mapping the structure">
+
+Now take a sip and roll it around your whole mouth. Drawing in a little air pushes aroma to the back of your nose and makes the flavour clearer. Your tongue senses only sweet, sour, bitter, salty and umami; the rest of what we call "taste" is really aroma sensed by the nose. That is why food tastes flat when you have a cold.
+
+Here is the structure table from chapter 1, "What is wine?", turned into a working tool.
+
+| Element | Where and how to check | Verdict |
+|---|---|---|
+| Sweetness | Is there sweetness on the tip of the tongue? | Dry / off-dry / medium / sweet |
+| Acidity | How much does your mouth water at the sides of the tongue after swallowing? | Low / medium / high |
+| Tannin | Do your gums and tongue feel dry and grippy? | Low / medium / high |
+| Alcohol | Does the back of your throat feel warm or hot? | Low / medium / high |
+| Body | The weight in your mouth (skimmed milk, whole milk, cream) | Light / medium / full |
+| Flavour intensity | How strong are the flavours in the mouth? | Light / medium / pronounced |
+| Finish | How long does it linger after you swallow or spit? | Short / medium / long |
+
+At first, **acidity and tannin** are hard to tell apart. Acidity makes your mouth **water**, tannin makes it **dry**. Remember they pull in opposite directions. And finally, the trap from chapter 4: **don't confuse fruitiness with sweetness**. Pinch your nose while tasting and only the real sweetness remains.
+
+When comparing several wines, it is fine to **spit** after tasting. Professionals do it all the time.
+
+</Section>
+
+<Section id="conclude" title="4. Conclude: sum it up in a sentence">
+
+With the information gathered, make two judgements at the end.
+
+**Quality** is usually judged on four criteria.
+
+- **Balance**: does any one of fruit, acid, tannin, alcohol or sweetness stick out?
+- **Length**: does the finish last?
+- **Intensity**: are the aromas and flavours clear and concentrated?
+- **Complexity**: are there several layers of aroma, or just one repeated?
+
+The more of these a wine meets, the better it is. Then guess **whether it is ready to drink now or could age further**. With enough acidity, tannin and flavour, it is more likely to improve with time.
+
+The conclusion need not be long. For example:
+
+*"Pale lemon. Pronounced green apple, lemon and grass. Dry, high acidity, light body, medium finish. Well balanced and fresh, ready to drink now."*
+
+If that note alone makes you guess a cool-climate Sauvignon Blanc, you have succeeded. **Systematic tasting**, which refines this process to exam standard, is completed in chapter 30, "Systematic tasting and final assessment".
+
+</Section>
+
+<Checkpoint
+  id="cp-acid-tannin"
+  q="If your mouth feels dry and grippy after a sip, which element is high?"
+  choices={['Tannin', 'Acidity', 'Sweetness', 'Body']}
+  answer={0}
+  explain="Tannin dries the mouth, acidity makes it water. They feel like opposites."
+/>
+
+<Section id="recap" title="Key points">
+
+- Tasting has five steps: **prepare → look → smell → taste → conclude**.
+- **Look**: clarity, intensity, colour. Whites deepen with age, reds fade and turn brown.
+- **Smell**: swirl to lift the aromas. Sort them into **primary (grape), secondary (winemaking) and tertiary (ageing)**.
+- **Taste**: sweetness, acidity, tannin, alcohol, body, flavour intensity, finish. Acidity makes the mouth water, tannin dries it. **Fruity is not sweet.**
+- **Conclude**: judge quality on balance, length, intensity and complexity, and guess when to drink it.
+
+Now check yourself with the quiz below. Score 80% or more to pass this chapter.
+
+</Section>

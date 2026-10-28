@@ -1,0 +1,177 @@
+---
+title: Types of wine at a glance
+lead: A wine shop's shelves may look bewildering, but a handful of questions will sort almost any wine. Does it have bubbles? Was spirit added? What colour is it? How sweet is it? With these four questions we draw a map of the wine world.
+related:
+  regions: [champagne, veneto, jerez, douro, tokaj]
+  grapes: [chardonnay, pinot-noir, riesling, palomino]
+quiz:
+  - q: Which of these is NOT one of the three big families of wine?
+    choices: [Distilled wine, Still wine, Sparkling wine, Fortified wine]
+    answer: 0
+    explain: Wine falls into three families, still, sparkling and fortified. Distil wine and you get brandy, which is no longer wine.
+  - q: What is the most common way to make rosé?
+    choices: [Leave black grape skins in the juice for only a short time, Add colouring to white wine, Age white grapes for a long time, Dilute red wine with water]
+    answer: 0
+    explain: A few hours to a day of skin contact gives a pale colour. In Europe, blending red and white to make rosé is mostly banned (rosé Champagne is the exception).
+  - q: Which method, used for Champagne and Cava, carries out the second fermentation inside the bottle?
+    choices: [Traditional method, Tank method, Carbonation, Fortification]
+    answer: 0
+    explain: The traditional method, with a second fermentation and lees ageing in the bottle, adds bready, biscuity flavours.
+  - q: Which method, used for Prosecco, carries out the second fermentation in a big tank to keep fresh fruit aromas?
+    choices: [Tank method, Traditional method, Solera method, Qvevri method]
+    answer: 0
+    explain: The tank method is quicker and cheaper, and suits keeping the fresh fruit of aromatic varieties.
+  - q: What does "Brut" mean on a sparkling wine label?
+    choices: [A dry style with almost no sweetness, A very sweet style, A style with weak bubbles, A rosé style]
+    answer: 0
+    explain: Brut is the most common dry style. Despite its name, Extra Dry is a little sweeter than Brut.
+  - q: When is Sherry normally fortified?
+    choices: [After fermentation, Before fermentation starts, During fermentation, Just before bottling along with CO₂]
+    answer: 0
+    explain: Spirit is added to a fully fermented dry wine, so basic Sherry is dry. Sweet Sherries have sweetness added later.
+  - q: Why is Port sweet?
+    choices: [Spirit added during fermentation stops the yeast, Sugar is added, It is made from frozen grapes, It is boiled for a long time]
+    answer: 0
+    explain: Once alcohol rises high enough the yeast stops working, leaving the grape sugar behind in a sweet, strong wine.
+  - q: Which are classic sweet wines made with noble rot?
+    choices: [Sauternes and Tokaji, Prosecco and Cava, Beaujolais and Chianti, Fino and Manzanilla]
+    answer: 0
+    explain: The Botrytis cinerea fungus draws water out of the grapes, concentrating sugar and acid and adding honey and apricot notes.
+  - q: Which wine is made by pressing frozen grapes to get concentrated juice?
+    choices: [Icewine, Sherry, Claret, Blanc de Blancs]
+    answer: 0
+    explain: The water in the grape stays behind as ice and only syrupy, sugar-rich juice runs out. Canada and Germany are the classic producers.
+  - q: What do we usually call amber wine made from white grapes fermented on their skins like a red?
+    choices: [Orange wine, Rosé wine, Blanc de Noirs, Tawny Port]
+    answer: 0
+    explain: Skin contact brings colour and a little tannin. Georgia's qvevri wines are the ancient root of this style.
+---
+
+import WineColors from '../../../src/components/WineColors.astro';
+
+<Section id="four-questions" title="Sorting wine with four questions">
+
+There are thousands of wine names, but ask these four questions of any unfamiliar bottle and you will have a fair idea of what it is.
+
+1. **Does it have bubbles?** If so it is sparkling, if not, still.
+2. **Was spirit added?** Then it is a fortified wine.
+3. **What colour is it?** White, rosé or red (and the slightly special orange).
+4. **How sweet is it?** Anywhere from dry to sweet.
+
+As we saw in chapter 1, "What is wine?", nearly all these differences come from **how fermentation is handled**. Trap the carbon dioxide and you get sparkling wine. Add spirit and you get fortified wine. How long the skins steep decides the colour, and how much sugar is left decides the sweetness.
+
+| Family | Alcohol (approx.) | What it is | Examples |
+|---|---|---|---|
+| Still wine | 9–15% | Ordinary wine without bubbles. Most wine belongs here | Red Bordeaux, Chablis, Provence rosé |
+| Sparkling wine | Usually 11–12.5% | Dissolved carbon dioxide makes bubbles | Champagne, Cava, Prosecco |
+| Fortified wine | 15–22% | Grape spirit added to raise the alcohol | Sherry, Port, Madeira |
+
+> Classifying wine is simpler than it looks. Just ask what happened while the yeast was at work.
+
+</Section>
+
+<Section id="colours" title="By colour: white, rosé, red and orange">
+
+The colour of a still wine is decided by **how long the juice stayed in contact with the skins**. It is a bit like tea: the longer the leaves steep, the darker the brew.
+
+<WineColors items={[
+  { name: 'Lemon (white)', hex: '#efe7a6' },
+  { name: 'Gold (white)', hex: '#e3c565' },
+  { name: 'Amber (orange)', hex: '#d79a4a' },
+  { name: 'Pale pink (rosé)', hex: '#f6c3b5' },
+  { name: 'Ruby (red)', hex: '#8e1b2c' },
+  { name: 'Garnet (red)', hex: '#7a2a1e' },
+]} />
+
+| Colour | How it is made | What it tastes like |
+|---|---|---|
+| White | Mostly white grapes. Skins removed at once and only the juice fermented | Almost no tannin, crisp acidity |
+| Rosé | Black grape skins steeped for a few hours to a day, then removed | Light and fruity. Strawberry, red berries |
+| Red | Black grapes fermented with their skins to extract colour and tannin | Has tannin, body ranges widely |
+| Orange | White grapes fermented on their skins (the red-wine method) | Amber, a little tannin, dried fruit and tea notes |
+
+One thing to remember: in Europe, **making rosé by blending red and white is mostly banned**. Rosé Champagne is the exception. **Orange wine** may look like a recent trend, but its ancient root is the Georgian qvevri wine we met in chapter 2, "Wine history I".
+
+How each style is actually made is covered step by step in chapter 11, "Winemaking basics".
+
+</Section>
+
+<Section id="sweetness" title="By sweetness: from dry to sweet">
+
+Sweetness depends on how much sugar is left after fermentation, the **residual sugar**. For everyday use, four levels are enough.
+
+| Level | How it feels | Examples |
+|---|---|---|
+| Dry | Almost no sweetness you can taste | Most reds, Chablis, Sauvignon Blanc |
+| Off-dry | A hint of sweetness | Some German Riesling, Vouvray demi-sec |
+| Medium sweet | Clearly sweet | Some German Spätlese, White Zinfandel |
+| Sweet | As sweet as dessert | Sauternes, Tokaji Aszú, Icewine, Port |
+
+The ways to make a sweet wine also boil down to a few.
+
+- **Stop fermentation early**: chill the wine or filter out the yeast to leave sugar behind.
+- **Concentrate the sugar**: pick late (late harvest), dry the grapes (Italian passito), press frozen grapes (**Icewine**), or let **noble rot** draw out the water (Sauternes, **Tokaji**) to make the sugar denser.
+- **Stop fermentation with spirit**: raise the alcohol as in Port so the yeast stops.
+
+One caution: **fruity is not the same as sweet.** It is easy to mistake a dry wine full of ripe fruit aromas for a sweet one. You will practise checking whether your tongue actually tastes sugar in chapter 5, "How to taste".
+
+</Section>
+
+<Checkpoint
+  id="cp-rose"
+  q="How is rosé usually made in Europe?"
+  choices={['By blending red and white wine', 'By ageing white grapes for a long time', 'By steeping black grape skins briefly, then removing them', 'By adding fruit juice to white wine']}
+  answer={2}
+  explain="A few hours to a day of skin contact gives a pale colour. Blending red and white is mostly not allowed, except for rosé Champagne."
+/>
+
+<Section id="sparkling" title="Sparkling: where do the bubbles come from?">
+
+The bubbles in most sparkling wine come from a **second fermentation**. Sugar and yeast are added to a finished still wine so it ferments again, and the carbon dioxide produced is trapped. Where it is trapped is the key.
+
+| Method | Where the second fermentation happens | What it tastes like | Classic wines |
+|---|---|---|---|
+| Traditional method | In each individual bottle | Fine bubbles, bread and biscuit notes from lees ageing | **Champagne**, Cava, Crémant |
+| Tank method | In a large sealed tank | Fresh fruit and floral notes, light and lively | Prosecco (**Veneto**) |
+
+Champagne ages for a long time on its lees. Even non-vintage Champagne (NV) must spend at least 15 months, including at least 12 on the lees, before release.
+
+It helps to know the sweetness terms on sparkling labels too. From driest to sweetest: **Brut Nature → Extra Brut → Brut → Extra Dry → Sec → Demi-Sec → Doux**. Brut is the most common. A classic trap: despite the name, **Extra Dry is a little sweeter than Brut**.
+
+</Section>
+
+<Section id="fortified" title="Fortified: when is the spirit added?">
+
+A fortified wine is wine with grape spirit added. **When** the spirit goes in decides how sweet it is.
+
+| | Sherry | Port |
+|---|---|---|
+| Region | **Jerez**, southern Spain | The **Douro** valley, Portugal |
+| Main grapes | The white grape **Palomino** | Black grapes such as Touriga Nacional |
+| When spirit is added | **After** fermentation | **During** fermentation |
+| Basic sweetness | Dry (sweetness is added later) | Sweet |
+| Classic styles | Fino, Amontillado, Oloroso | Ruby, Tawny, Vintage |
+
+Port makes the principle clear. Add spirit during fermentation and, as the alcohol rises, the yeast stops working. The grape sugar not yet turned into alcohol stays behind, giving a wine that is both sweet and strong. Sherry, Port and Madeira are covered in detail in chapter 29, "Sparkling, sweet and fortified".
+
+</Section>
+
+<Checkpoint
+  id="cp-port"
+  q="Why is Port sweet?"
+  choices={['Sugar is added after pressing', 'It is made from frozen grapes', 'It uses grapes with noble rot', 'Spirit added during fermentation stops the yeast']}
+  answer={3}
+  explain="Once the alcohol is high enough the yeast stops working, and the grape sugar left behind gives the sweetness."
+/>
+
+<Section id="recap" title="Key points">
+
+- Wine falls into three families: **still, sparkling and fortified**.
+- Colour is decided by **time on the skins**. White, rosé, red, and **orange**, made from white grapes fermented on their skins.
+- Sweetness is the amount of **residual sugar**. Ways to keep sugar: stop fermentation, concentrate sugar (late harvest, drying, Icewine, noble rot), or fortify.
+- Sparkling wines split by whether the second fermentation happens **in the bottle (traditional method)** or **in a tank (tank method)**. **Brut** is the most common sweetness term.
+- For fortified wines, **timing** is everything. **Sherry**, fortified after fermentation, is dry at base. **Port**, fortified during fermentation, is sweet.
+
+Now check yourself with the quiz below. Score 80% or more to pass this chapter.
+
+</Section>
