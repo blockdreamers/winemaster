@@ -1,0 +1,191 @@
+---
+title: The vine's year
+lead: A vine bears fruit just once a year. Its whole year, from waking out of winter sleep to budding, flowering, ripening and harvest, ends up in the bottle. Learn that calendar and you will see why vintage and harvest timing matter so much.
+related:
+  regions: [champagne, mosel, burgundy]
+  grapes: [chardonnay, pinot-noir, riesling]
+quiz:
+  - q: When does the grape harvest mostly take place in the Northern Hemisphere?
+    choices: [September–October, March–April, June–July, December–January]
+    answer: 0
+    explain: The Northern Hemisphere usually harvests in September and October. In the Southern Hemisphere the seasons are reversed, so harvest runs from February to April.
+  - q: At which stage do the berries soften and black grape skins start to colour?
+    choices: [Véraison, Budburst, Fruit set, Dormancy]
+    answer: 0
+    explain: Véraison signals that ripening has properly begun. From here sugar rises and acid falls.
+  - q: Which weather is most dangerous for young shoots just after budburst?
+    choices: [Spring frost, A midsummer heatwave, Dry winds at harvest, Winter snow]
+    answer: 0
+    explain: A single night below freezing can kill newly emerged shoots, which is why frost protection is concentrated in spring.
+  - q: What generally happens as grapes ripen?
+    choices: [Sugar rises and acid falls, Sugar and acid both rise, Sugar falls and acid rises, Neither sugar nor acid changes]
+    answer: 0
+    explain: Ripening is a tug of war between sugar and acid. Pick too late and the wine is sweet but flat; too early and it is sour and green.
+  - q: What is it called when bad weather at flowering stops flowers setting into berries, so they drop off?
+    choices: [Coulure, Véraison, Botrytis, Bâtonnage]
+    answer: 0
+    explain: In a cold, wet, windy flowering, pollination fails and bunches end up sparsely set. Yields fall sharply.
+  - q: What is the main reason grapes for sparkling wine are picked relatively early?
+    choices: [To keep high acidity, To increase tannin, To raise the alcohol, To deepen the skin colour]
+    answer: 0
+    explain: Fresh acidity is the backbone of sparkling wine. Picking before sugar climbs too high preserves the acid.
+  - q: What is the most important vineyard task during dormancy (winter)?
+    choices: [Pruning, Harvesting, Leaf removal, Fermentation]
+    answer: 0
+    explain: In leafless winter, last year's canes are cut back to set this year's number of buds, the first step in deciding yield and quality.
+  - q: When do vines bud in the Southern Hemisphere (Chile, Australia and so on)?
+    choices: [September–October, March–April, June–July, December–January]
+    answer: 0
+    explain: The Southern Hemisphere runs about six months apart from the north. Spring comes in September and October.
+  - q: What does "phenolic ripeness" refer to?
+    choices: [How ripe the tannins and colour in skins and seeds are, How much sugar has turned into alcohol, How much a wine has aged in bottle, The age of the vine]
+    answer: 0
+    explain: Even with enough sugar, unripe tannins taste astringent and green. It is a key yardstick, especially for red wine.
+  - q: Which is NOT a likely problem when heavy rain falls just before harvest?
+    choices: [Acidity rises sharply, The juice is diluted, Berries split, Rot spreads easily]
+    answer: 0
+    explain: Rain dilutes the juice, splits the berries and invites rot. It does not push acidity up.
+---
+
+import Ch08VineCycle from '../../../src/components/illustrations/Ch08VineCycle.astro';
+import Ch08Ripening from '../../../src/components/illustrations/Ch08Ripening.astro';
+
+<Section id="one-crop" title="One harvest a year">
+
+A vine is a **perennial climbing plant** that, once planted, lives for decades. Yet it bears fruit only once a year. Just as a rice farmer stakes everything on a single year's weather from planting to harvest, wine inherits everything that happened in the vineyard that year.
+
+That is why the **vintage**, the harvest year printed on the label, matters. Even from the same vineyard and producer, wines from a year with spring frost, a year with an unusually hot summer and a year with a deluge just before harvest will all differ.
+
+The period in which the vine buds and ripens its fruit is the **growing season**: roughly April to October in the Northern Hemisphere and October to April in the Southern. The rest of the year it drops its leaves and rests, preparing for the next.
+
+> A bottle of wine is a snapshot of a vine's year. That year's spring and summer are inside it.
+
+</Section>
+
+<Section id="cycle" title="The year in seven stages">
+
+The vine's year is usually split into seven stages. In the Southern Hemisphere the seasons are reversed, so everything happens about six months later, or earlier.
+
+<figure>
+  <Ch08VineCycle
+    labels={{ north: 'North', south: 'South' }}
+    stages={[
+      { name: 'Dormancy', en: 'dormance', north: 'Nov–Mar', south: 'May–Sep' },
+      { name: 'Budburst', en: 'débourrement', north: 'Mar–Apr', south: 'Sep–Oct' },
+      { name: 'Flowering', en: 'floraison', north: 'May–Jun', south: 'Nov–Dec' },
+      { name: 'Fruit set', en: 'nouaison', north: 'Jun', south: 'Dec' },
+      { name: 'Véraison', en: 'véraison', north: 'Jul–Aug', south: 'Jan–Feb' },
+      { name: 'Ripening', en: 'maturation', north: 'Aug–Sep', south: 'Feb–Mar' },
+      { name: 'Harvest', en: 'vendange', north: 'Sep–Oct', south: 'Feb–Apr' },
+    ]}
+    hazards={[
+      { at: 1, text: 'Spring frost' },
+      { at: 2.5, text: 'Coulure' },
+      { at: 4.5, text: 'Hail · drought' },
+      { at: 6, text: 'Rain · rot' },
+    ]}
+  />
+  <figcaption>The vine's annual cycle. Timing shifts by weeks with region, grape variety and the year's weather.</figcaption>
+</figure>
+
+| Stage | What happens | What people do |
+|---|---|---|
+| Dormancy | Leaves fall and the vine rests. Reserves are stored in trunk and roots | **Pruning** sets this year's number of buds |
+| Budburst | As temperatures rise, shoots emerge from the buds | Watch for frost |
+| Flowering | Tiny flowers bloom and pollinate themselves | Little to do but watch the weather |
+| Fruit set | Pollinated flowers become small, hard green berries | Shoot thinning, disease control |
+| Véraison | Berries soften and black grapes colour | Bunch thinning, canopy work |
+| Ripening | Sugar rises, acid falls, aromas and tannins ripen | Taste and analyse daily to choose the picking date |
+| Harvest | The grapes are picked | Pick by hand or machine and take them to the winery |
+
+It is often said that flowering to harvest takes around 100 days. Of course, it varies quite a bit between early- and late-ripening varieties and between warm and cool years.
+
+</Section>
+
+<Checkpoint
+  id="cp-hemisphere"
+  q="When harvest is in full swing in the vineyards of Mendoza, Argentina, what are the vines in Burgundy, France doing?"
+  choices={['Being harvested', 'Flowering', 'Dormant, or about to bud', 'Starting véraison']}
+  answer={2}
+  explain="The southern harvest (February–April) falls in the northern late winter and early spring. Burgundy's vines are still resting or getting ready to bud."
+/>
+
+<Section id="spring" title="Spring: shoots, flowers and frost">
+
+When spring comes and average temperatures rise above about 10°C, the buds that slept all winter **burst**. From here begins the grower's biggest worry: **spring frost**.
+
+New shoots are tender and full of water, so if the temperature drops below freezing on a clear, still night, they can freeze overnight. Cold air is heavy and pools in low spots, so vineyards on valley floors are especially at risk. Growers use methods like these.
+
+| Frost protection | How it works |
+|---|---|
+| Wind machines | Mix warmer air from above down to the vines |
+| Heaters, candles | Fires lit around the vineyard warm the air |
+| Sprinklers | Water releases heat as it freezes, holding the shoots near 0°C |
+| Choosing slopes | Plant on slopes where cold air drains away in the first place |
+
+A few weeks after budburst, **flowering** begins. Vine flowers are small and inconspicuous, but this stage decides the size of the crop. If cold, wet or windy days drag on, pollination fails and the flowers simply drop, which is called **coulure**. Bunches with a mix of large and small berries, known as **millerandage**, have the same cause.
+
+Successfully pollinated flowers turn into small, hard green berries. This is **fruit set**. At this point the grapes are very sour and hard.
+
+</Section>
+
+<Section id="summer" title="Summer: véraison and ripening">
+
+One day in midsummer, the hard green berries soften and the skins of black grapes start to blush red. This change is called **véraison**. White grapes lose their green and turn translucent too. From véraison on, the grapes ripen in earnest.
+
+As they ripen, four things happen inside the berry at once.
+
+- **Sugar builds up.** Sugar made by the leaves through photosynthesis moves into the fruit. Sugar is the raw material of alcohol.
+- **Acid falls.** In particular, sharp, green-apple-like **malic acid** drops sharply through heat and respiration. **Tartaric acid**, the grape's other main acid, holds up relatively well.
+- **Aromas develop.** Grassy notes fade and the variety's own fruit aromas grow stronger.
+- **Tannin and colour ripen.** Harsh tannins in skins and seeds soften and pigment increases. This is called **phenolic ripeness**.
+
+Summer has its dangers too: **hail**, which can shred leaves and fruit in moments; severe **drought**, which exhausts the vine and stalls ripening; and heatwaves that scorch the skins. In hail-prone places such as Burgundy, one storm can wipe out much of a year's crop.
+
+</Section>
+
+<Checkpoint
+  id="cp-ripening"
+  q="What decreases inside the berry after véraison?"
+  choices={['Sugar', 'Pigment', 'Malic acid', 'Aroma compounds']}
+  answer={2}
+  explain="As grapes ripen, sugar, colour and aroma increase while sharp malic acid decreases."
+/>
+
+<Section id="harvest" title="When to pick: the sugar–acid tug of war">
+
+As grapes ripen, sugar keeps rising and acid keeps falling. So **when you pick** decides **what wine you make**.
+
+<figure>
+  <Ch08Ripening labels={{ sugar: 'Sugar', acid: 'Acid', start: 'Véraison', time: 'Time →', windows: ['For sparkling', 'Dry wine', 'Late-harvest sweet'] }} />
+  <figcaption>Sugar and acid move in opposite directions. Where you pick along the curve sets the style of the wine.</figcaption>
+</figure>
+
+| Picking time | State of the grapes | Suits |
+|---|---|---|
+| Early | High acid, low sugar. Green, fresh aromas | Sparkling wines such as Champagne, light crisp whites |
+| Balanced | Sugar, acid and tannin in balance | Most dry wines |
+| Late | High sugar, low acid. Jammy aromas | Rich, high-alcohol wines, late-harvest sweet wines |
+| Very late | Frozen or shrivelled on the vine, sugar concentrated | Icewine, some noble rot wines |
+
+Pick too early and the wine is sour and green with harsh tannins. Pick too late and it is sweet and high in alcohol, but the acid is gone and it feels flat and heavy. It is a bit like kimchi: choosing the moment of flavour you want somewhere between freshly made and long fermented.
+
+> Choosing a picking date is not deciding "how sweet" but "what balance".
+
+So in the weeks before harvest, producers walk the vineyard every day, chewing grapes, measuring sugar and acidity and checking whether the seeds have turned brown. Then the weather throws in a variable. If heavy rain is forecast for next week, they may have to pick early even if the grapes are not quite ripe, because rain dilutes the juice, splits the berries and invites rot.
+
+The climate that drives picking time continues in chapter 9, "Climate and terroir", and the difference between hand and machine harvesting in chapter 10, "Vineyard management".
+
+</Section>
+
+<Section id="recap" title="Key points">
+
+- A vine bears fruit **once a year**, and that year's weather becomes the character of the **vintage**.
+- The year runs **dormancy → budburst → flowering → fruit set → véraison → ripening → harvest**. The Southern Hemisphere is about six months apart.
+- The Northern Hemisphere harvests mostly in **September–October**, the Southern in **February–April**.
+- The dangers: **frost** in spring, **coulure** at flowering, **hail and drought** in summer, **rain and rot** at harvest.
+- As grapes ripen, **sugar rises and acid falls**. Choosing the picking date means choosing the balance point.
+
+Now check yourself with the quiz below. Score 80% or more to pass this chapter.
+
+</Section>

@@ -1,0 +1,176 @@
+---
+title: Winemaking basics
+lead: White, red and rosé are made from the same basic ingredients by the same fermentation, but in a slightly different order. The key difference comes down to one thing, when the grape skins are separated. We follow the grapes step by step from harvest to bottle.
+related:
+  regions: [burgundy, bordeaux, rhone]
+  grapes: [chardonnay, sauvignon-blanc, pinot-noir, grenache, cabernet-sauvignon]
+quiz:
+  - q: What is the biggest difference between white and red winemaking?
+    choices: [Whites are pressed to remove the skins before fermentation, Whites are not fermented, Only black grapes are used, Whites must be fermented in oak]
+    answer: 0
+    explain: White wine ferments the juice alone; red wine ferments with the skins and is pressed afterwards. The order of pressing is the key divide.
+  - q: What is the usual fermentation temperature range for white wine?
+    choices: [About 12–22°C, About 30–40°C, About 0–5°C, About 40–50°C]
+    answer: 0
+    explain: Slow fermentation at low temperatures preserves delicate fruit aromas. Reds ferment warmer, at about 20–32°C.
+  - q: What is the layer of skins pushed to the top by carbon dioxide during red fermentation called?
+    choices: [The cap, The lees, The bloom, The cordon]
+    answer: 0
+    explain: Skins floating on top give up little colour and tannin and dry out easily, so the cap is pushed down or soaked with juice pumped over it.
+  - q: Which technique draws juice from the bottom of the tank and sprays it over the cap?
+    choices: [Pumping over, Punching down, Racking, Bâtonnage]
+    answer: 0
+    explain: Pumping over (remontage) soaks the skins with juice drawn from below; punching down (pigeage) pushes the cap down into the juice.
+  - q: What does red press wine generally have more of than free-run wine?
+    choices: [Tannin and colour, Sugar, Oxygen, Carbon dioxide]
+    answer: 0
+    explain: Squeezed from the skins, it is deeper in tannin and colour. Producers blend in as much as they want.
+  - q: Which method is mainly used to make very pale rosé, as in Provence?
+    choices: [Direct pressing of black grapes, Blending red and white wine, Fermenting on the skins for weeks, Long oak ageing]
+    answer: 0
+    explain: The tiny amount of colour released from the skins during pressing gives a pale pink hue.
+  - q: What is the classic European exception where rosé may be made by blending red and white wine?
+    choices: [Rosé Champagne, Provence rosé, Tavel rosé, Rosé d'Anjou]
+    answer: 0
+    explain: In Europe most still rosé cannot be blended, but rosé Champagne is often made by adding red wine.
+  - q: Which process prevents the clear crystals known as wine diamonds forming in the bottle?
+    choices: [Tartrate stabilisation, Malolactic fermentation, Punching down, Green harvesting]
+    answer: 0
+    explain: One method is chilling the wine so tartrates settle out in advance. The crystals are harmless.
+  - q: Which process adds substances like egg white or bentonite to settle fine particles out of the wine?
+    choices: [Fining, Filtration, Chaptalisation, Maceration]
+    answer: 0
+    explain: The fining agent binds with unwanted particles and they sink together. The wine is then racked off or filtered.
+  - q: What is the main reason for using sulphur dioxide (SO₂) in winemaking?
+    choices: [To prevent oxidation and microbial spoilage, To add sweetness, To remove colour, To raise the alcohol]
+    answer: 0
+    explain: SO₂ protects against oxidation and microbes, keeping the wine fresh. That is why labels say "contains sulphites".
+---
+
+import Ch11WineProcess from '../../../src/components/illustrations/Ch11WineProcess.astro';
+
+<Section id="overview" title="One question: when do the skins come out?">
+
+As we saw in chapter 1, "What is wine?", grape juice is almost clear, and the colour and tannin are in the skins. So the main thread of winemaking is simple: **how long the skins and juice stay together** separates white, rosé and red.
+
+<figure>
+  <Ch11WineProcess columns={[
+    { title: 'White', steps: [
+      { t: 'Harvest' }, { t: 'Crush · destem' }, { t: 'Press (skins out)', key: true }, { t: 'Settle the juice' },
+      { t: 'Ferment 12–22°C' }, { t: 'Mature' }, { t: 'Fine · stabilise' }, { t: 'Bottle' },
+    ] },
+    { title: 'Rosé', steps: [
+      { t: 'Harvest' }, { t: 'Crush · destem' }, { t: 'Short maceration' }, { t: 'Press (skins out)', key: true },
+      { t: 'Ferment (like white)' }, { t: 'Fine · stabilise' }, { t: 'Bottle' },
+    ] },
+    { title: 'Red', steps: [
+      { t: 'Harvest' }, { t: 'Crush · destem' }, { t: 'Ferment 20–32°C' }, { t: 'Manage the cap' },
+      { t: 'Press (skins out)', key: true }, { t: 'Malolactic · mature' }, { t: 'Fine · stabilise' }, { t: 'Bottle' },
+    ] },
+  ]} />
+  <figcaption>The order of steps for the three wines. The filled box is where the skins come out: before fermentation for white, after it for red.</figcaption>
+</figure>
+
+When grapes arrive at the winery, they are first **crushed** to split the berries gently and release the juice, then **destemmed** to remove the stalks. Some producers who want the green tannin of the stems use whole bunches instead.
+
+Sometimes the juice is adjusted before fermentation. In cool years sugar may be added to raise the alcohol (**chaptalisation**), and in hot regions acid may be added (**acidification**), but both are allowed only within each country's and region's rules. At almost every step, a little **sulphur dioxide (SO₂)** is used to guard against oxidation and spoilage microbes.
+
+</Section>
+
+<Section id="white" title="White wine: only the juice is fermented">
+
+The goal of white winemaking is usually to keep **fresh fruit aromas and acidity**. So heat and oxygen are avoided throughout.
+
+1. **Harvest and transport** – grapes may be picked in the cool of the morning or at night so they don't warm up, and are taken quickly to the winery.
+2. **Crushing and pressing** – the berries are split and then **pressed** straight away to collect only the juice. Delicate wines such as Champagne may be pressed gently as whole bunches. To draw out more aroma, some winemakers leave the juice on the skins for a few hours before pressing (**skin contact**).
+3. **Settling** – soil and bits of skin in the juice are allowed to settle, and only the clear juice is drawn off.
+4. **Fermentation** – at about **12–22°C**. The lower the temperature, the more vivid the aromas. Aromatic varieties such as Sauvignon Blanc and Riesling often go into **stainless steel tanks**, where temperature is easy to control, while Chardonnay may go into **oak barrels** for texture and complexity.
+5. **Maturation and finishing** – after a few months of shaping in tank or barrel, the wine is clarified and bottled.
+
+Just as pickles and kimchi taste cleanest when fermented slowly somewhere cool, white wine shows its aromas most cleanly when fermented slowly at low temperatures.
+
+</Section>
+
+<Checkpoint
+  id="cp-white"
+  q="What is the main reason for keeping white wine fermentation cool?"
+  choices={['To extract more tannin', 'To deepen the colour', 'To preserve delicate fruit aromas', 'To raise the alcohol']}
+  answer={2}
+  explain="At high temperatures delicate aroma compounds evaporate or change. Slow, cool fermentation keeps the fruit alive."
+/>
+
+<Section id="red" title="Red wine: fermented with the skins">
+
+The goal of red winemaking is to **extract colour, tannin and flavour from the skins**. So the crushed grapes go into the tank skins and all to ferment. Soaking the skins in the juice to draw out these components is called **maceration**.
+
+Red wine ferments warmer than white, at about **20–32°C**, since warmth helps extract the skins' components. Once fermentation starts, carbon dioxide pushes the skins to the top, forming a thick layer called the **cap**. Left alone, the cap does not touch the juice, so nothing is extracted, and spoilage microbes can grow on the dry skins. So the cap is managed.
+
+| Method | What it does | Features |
+|---|---|---|
+| **Punching down (pigeage)** | Pushes the cap down into the juice with a paddle or machine | Gentle extraction. Traditional for Burgundy Pinot Noir |
+| **Pumping over (remontage)** | Draws juice from the bottom of the tank and sprays it over the cap | Efficient in large tanks. Also adds oxygen |
+| **Rack and return (délestage)** | Drains all the juice, then pours it back over the cap | A strong extraction in one go |
+
+Maceration lasts anywhere from a few days to several weeks. Short maceration gives light, fruit-driven reds; long maceration gives deep reds with firm tannin.
+
+When fermentation finishes, the **free-run wine** that flows from the tank on its own is drawn off first, then the remaining skins are **pressed** to obtain **press wine**. Press wine is deeper in tannin and colour, so producers blend in as much as they want to adjust the structure. Almost all red wines then go through **malolactic fermentation**, which is covered in chapter 12, "Oak and ageing".
+
+Meanwhile **carbonic maceration**, famous in Beaujolais, puts uncrushed bunches into a tank filled with carbon dioxide so that fermentation starts inside the berries. The result is a light, intensely fruity red with little tannin and aromas of banana or bubblegum.
+
+</Section>
+
+<Section id="rose" title="Rosé: somewhere in between">
+
+Rosé is made from black grapes, but the skins stay in contact for only a very short time. There are three main methods.
+
+| Method | Process | Result |
+|---|---|---|
+| **Direct pressing** | Black grapes are pressed straight away, using only the colour released during pressing | Very pale pink. The Provence style |
+| **Short maceration** | Skins steep for a few hours to two or three days, then the grapes are pressed | From salmon to deep pink |
+| **Saignée** | Some juice is bled off early from a tank making red wine and fermented separately | Deeper rosé. The remaining red becomes more concentrated |
+
+Once the skins are removed, rosé is fermented cool like a white wine to keep its fruit. Making rosé by blending red and white wine is mostly banned in Europe, but **rosé Champagne** is the classic exception.
+
+</Section>
+
+<Checkpoint
+  id="cp-red-rose"
+  q="Which method makes rosé by bleeding off some juice early from a red wine fermentation tank?"
+  choices={['Saignée', 'Direct pressing', 'Carbonic maceration', 'Punching down']}
+  answer={0}
+  explain="Saignée is French for 'bleeding'. The juice drawn off becomes rosé, and the red left in the tank, with a higher ratio of skins, becomes deeper."
+/>
+
+<Section id="finishing" title="Clear, stable, and into the bottle">
+
+After fermentation and maturation, dead yeast and fine particles float in the wine. Before bottling, the wine needs to be **clarified** and **stabilised**.
+
+**Clarification**
+
+- **Racking** – over time sediment settles to the bottom, and the clear wine is moved to another vessel, leaving the sediment behind.
+- **Fining** – a **fining agent** such as egg white or bentonite (a type of clay) binds with unwanted particles and they sink together.
+- **Filtration** – the wine is passed through a filter. Fine filters remove even yeast and bacteria. Some producers skip filtration to protect flavour and write "unfiltered" on the label.
+
+**Stabilisation**
+
+- **Tartrate stabilisation** – kept cold, the tartaric acid in wine can form clear crystals that sink. They are harmless, but customers may mistake them for glass, so wine is often chilled in advance and the crystals removed.
+- **Protein stabilisation** – whites and rosés can turn hazy in bottle because of proteins, so these are removed beforehand with bentonite.
+- **Microbial stabilisation** – managing SO₂ and fine filtration prevent refermentation or spoilage microbes in the bottle. This matters most for wines with residual sugar.
+
+Finally, wines from different tanks and barrels are **blended** to fine-tune the taste, the SO₂ level is adjusted, and the wine is **bottled**. Keeping oxygen out during bottling is important. Closures such as cork and screwcap were covered in chapter 7, "Storage, service, glasses and temperature".
+
+> Most of winemaking is not about adding things, but about not losing what good grapes already have.
+
+</Section>
+
+<Section id="recap" title="Key points">
+
+- What separates white, rosé and red is **when the skins are removed**.
+- **White**: press, then ferment only the juice at about **12–22°C**. The goal is to keep aroma and acidity.
+- **Red**: ferment with the skins at about **20–32°C**, extracting colour and tannin by **managing the cap** (punching down, pumping over). Press after fermentation.
+- **Rosé**: **direct pressing, short maceration, saignée**. In Europe, **rosé Champagne** is the classic exception allowed to blend red and white.
+- Before bottling, **fining and filtration** clarify the wine, and **tartrate, protein and microbial stabilisation** prevent changes in the bottle.
+
+Now check yourself with the quiz below. Score 80% or more to pass this chapter.
+
+</Section>
