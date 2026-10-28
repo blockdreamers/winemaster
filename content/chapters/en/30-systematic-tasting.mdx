@@ -1,0 +1,249 @@
+---
+title: Systematic Tasting and Final Assessment
+lead: If you can describe a wine beyond "tasty" or "not tasty", in the same order and the same words every time, no unfamiliar wine will throw you. This chapter turns appearance, nose, palate and conclusions into one framework, then looks back over all thirty chapters at once.
+related:
+  regions: [bordeaux, burgundy, rioja, mosel]
+  grapes: [cabernet-sauvignon, pinot-noir, tempranillo, riesling, chardonnay]
+quiz:
+  - q: How does the colour of a red wine generally change as it gets older?
+    choices: ["Purple → ruby → garnet → tawny", "Garnet → ruby → purple", "Ruby → purple → black", "The colour doesn't change"]
+    answer: 0
+    explain: Reds lose their purple with age and fade towards brick-red and tawny. Whites do the opposite, deepening from lemon to gold to amber.
+  - q: Which of these is a tertiary aroma (one that comes from ageing)?
+    choices: ["Mushroom and leather", "Lemon and green apple", "Vanilla and toast", "Butter and cream"]
+    answer: 0
+    explain: Fruit and flowers are primary (grape and fermentation), vanilla, toast and butter are secondary (winemaking), and mushroom, leather and nuts are tertiary (ageing).
+  - q: Which winemaking process most readily creates butter and cream aromas?
+    choices: ["Malolactic fermentation", "Carbonic maceration", "Cold stabilisation", "Remuage"]
+    answer: 0
+    explain: Sharp malic acid turns into softer lactic acid, producing the compound behind buttery aromas. We covered it in Chapter 12.
+  - q: Which is NOT one of the four things considered together when judging quality?
+    choices: ["Price", "Balance", "Length", "Complexity"]
+    answer: 0
+    explain: Balance, length, intensity and complexity are considered together. Price and quality often don't match.
+  - q: What is the term for how long aromas and flavours linger after swallowing?
+    choices: ["Length (finish)", "Body", "Intensity", "Acidity"]
+    answer: 0
+    explain: A longer finish generally means higher quality. Count how many seconds the fruit lingers after you swallow.
+  - q: Which aphid-like pest devastated Europe's vineyards in the late 19th century?
+    choices: ["Phylloxera", "Botrytis", "Flor", "Powdery mildew"]
+    answer: 0
+    explain: Phylloxera attacks the roots. The crisis was overcome by grafting onto American rootstocks (Chapter 3).
+  - q: What are the general traits of wine made from grapes grown in a cool climate?
+    choices: ["Higher acidity and lower alcohol", "High alcohol and jammy fruit", "Always strong tannins", "Always sweet"]
+    answer: 0
+    explain: With less warmth, less sugar builds up and more acid remains. This is the core of Chapter 9, "Climate and Terroir".
+  - q: When drinking with spicy food, which wine elements make the heat feel stronger?
+    choices: ["High alcohol and strong tannins", "A touch of sweetness", "High acidity", "Low alcohol"]
+    answer: 0
+    explain: Chilli heat makes alcohol and tannin feel hotter and more bitter. A slightly sweet, low-alcohol wine is easier (Chapter 6).
+  - q: Which variety makes Barolo and Barbaresco?
+    choices: ["Nebbiolo", "Sangiovese", "Tempranillo", "Grenache"]
+    answer: 0
+    explain: Nebbiolo is a Piedmont grape with very high acidity and tannin for its pale colour (Chapters 18 and 22).
+  - q: Which signature Spanish variety is famous for Rioja Reserva and Gran Reserva?
+    choices: ["Tempranillo", "Malbec", "Pinotage", "Zinfandel"]
+    answer: 0
+    explain: Tempranillo is the star of Rioja and Ribera del Duero, and categories are defined by time in oak (Chapter 23).
+  - q: What is the signature red variety of Mendoza in Argentina?
+    choices: ["Malbec", "Carmenère", "Syrah", "Pinot Noir"]
+    answer: 0
+    explain: Malbec, which came from South-West France, gained deep colour and soft tannins under the high-altitude Andean sun (Chapter 26).
+  - q: How does Extra Dry sparkling wine compare with Brut?
+    choices: ["Extra Dry is slightly sweeter", "Brut is sweeter", "They have the same sweetness", "Extra Dry has no sugar at all"]
+    answer: 0
+    explain: Contrary to its name, Extra Dry has a little more sweetness than Brut (Chapter 29).
+  - q: Which light, dry Sherry style goes through biological ageing under flor?
+    choices: ["Fino", "Oloroso", "Pedro Ximénez", "Cream"]
+    answer: 0
+    explain: Flor blocks oxygen, preserving a pale colour and bread and almond aromas (Chapter 29).
+  - q: What is the best way to store leftover red wine?
+    choices: ["Close it and put it in the fridge", "Leave it open in a sunny spot", "Stand it on a warm kitchen shelf", "Freeze it and thaw it to drink"]
+    answer: 0
+    explain: Low temperature slows oxidation. Take it out about 30 minutes before drinking to let it warm up (Chapter 7).
+  - q: 'At which stage of tasting do you make the judgement "this wine is good now but can age for a few more years"?'
+    choices: ["Conclusions", "Appearance", "Nose", "Palate"]
+    answer: 0
+    explain: At the conclusions stage you judge quality along with the best time to drink (ageing potential). The clues gathered in the first three stages are the evidence.
+---
+
+import WineColors from '../../../src/components/WineColors.astro';
+
+<Section id="appearance" title="Step 1, appearance: clues gathered by eye">
+
+In Chapter 5, "Tasting Basics", we learned the order: look, smell, taste, conclude. This chapter attaches a **fixed list of questions** to that order. The goal of systematic tasting is not to guess the right answer but to **check the same items in the same order, whoever is tasting**. With the questions fixed, like a doctor's intake form, nothing gets missed and your notes can be compared with anyone else's.
+
+> A tasting note is not a review; it is a record of observations. Write down the evidence before the feelings.
+
+Tilt the glass about 45 degrees over white paper or a white tablecloth and look at three things.
+
+| Item | How to look | What to write |
+|---|---|---|
+| Clarity | Is it hazy, or is anything floating? | Clear / hazy |
+| Intensity | Can you see the bottom through the centre of the glass? | Pale / medium / deep |
+| Colour | The colour at the centre and at the edge (rim) | One of the colour names below |
+
+You don't need many colour names. Five or six per wine colour is plenty.
+
+<WineColors items={[
+  { name: 'Lemon-green', hex: '#e9ecb0' },
+  { name: 'Lemon', hex: '#efe7a6' },
+  { name: 'Gold', hex: '#e3c565' },
+  { name: 'Amber', hex: '#c98a2e' },
+  { name: 'Pink', hex: '#f4b6bd' },
+  { name: 'Salmon', hex: '#f2a98f' },
+  { name: 'Purple', hex: '#5b1a3a' },
+  { name: 'Ruby', hex: '#8e1b2c' },
+  { name: 'Garnet', hex: '#7a2a1e' },
+  { name: 'Tawny', hex: '#9a5a2c' },
+]} />
+
+Colour is a clue to age. **Whites get deeper with age** (lemon → gold → amber), while **reds get paler** (purple → ruby → garnet → tawny). If a tilted red shows a wide orange or brick-coloured rim, it is likely to be a mature wine. Depth of colour is a clue to the variety: Pinot Noir and Nebbiolo are pale, while Malbec and Syrah are deep.
+
+The **legs** that run down the glass after swirling only hint at higher alcohol or sugar; they have nothing to do with quality. For a sparkling wine, note the size and persistence of the bubbles.
+
+</Section>
+
+<Section id="nose" title="Step 2, nose: condition, intensity, development, aroma clusters">
+
+Smell once before swirling and once after. Ask four questions in turn.
+
+**1. Condition.** Is it clean, or is there a fault? A smell of wet newspaper or a musty cellar can mean cork taint (TCA); a smell like a browned apple can mean unintended oxidation (Chapter 7). If there's a fault, stop there and note it.
+
+**2. Intensity.** If the aroma rises before your nose even reaches the glass, it's pronounced; if you have to put your nose deep in the glass to catch it, it's light.
+
+**3. Development.** How mature is the wine right now?
+
+| Stage | Aromas at the centre |
+|---|---|
+| Youthful | Only primary and secondary aromas: fresh fruit, flowers, oak |
+| Developing | Tertiary notes begin to peek through the fresh fruit |
+| Fully developed | Tertiary aromas like dried fruit, mushroom and leather take centre stage |
+| Past its best | The fruit has faded and it feels tired and flat |
+
+**4. Aroma clusters.** Sort aromas into three drawers by **where they came from**. When you meet an unfamiliar aroma, start by asking which drawer it belongs in.
+
+| Cluster | Where it comes from | Examples |
+|---|---|---|
+| Primary | The grape itself and alcoholic fermentation | Flowers (rose, violet), green fruit (apple, pear), citrus, stone fruit (peach, apricot), tropical fruit, red fruit, black fruit, herbs (grass, mint), pepper, mineral notes like wet stone |
+| Secondary | Winemaking | Yeast and lees (bread, biscuit), malolactic fermentation (butter, cream), oak (vanilla, toast, clove, coconut, smoke) |
+| Tertiary | Ageing | Oxidation (nuts, caramel, coffee), bottle age (dried fruit, mushroom, leather, earth, honey, petrol) |
+
+The character of the fruit is a clue as well. Tart, green fruit points to a cool climate; ripe or jammy fruit points to a warm one (Chapter 9).
+
+</Section>
+
+<Checkpoint
+  id="cp-clusters"
+  q="If a young Chardonnay smells of vanilla and toast, where do those aromas mainly come from?"
+  choices={['The grape variety itself (primary)', 'Oak ageing (secondary)', 'Long bottle ageing (tertiary)', 'Cork taint']}
+  answer={1}
+  explain="Vanilla, toast and clove are classic oak aromas, secondary aromas from winemaking. Because the wine is young, they are also distinct from tertiary aromas."
+/>
+
+<Section id="palate" title="Step 3, palate: structure and finish">
+
+Roll a sip around your whole mouth, then swallow or spit. To the five structural elements from Chapter 1, add **flavour intensity** and **finish**, and check seven items. For most, five boxes are enough: low, medium-minus, medium, medium-plus and high.
+
+| Item | Where and how you feel it | How to write it |
+|---|---|---|
+| Sweetness | Sweetness on the tip of the tongue, a sticky texture | Dry / off-dry / medium / sweet / luscious |
+| Acidity | How much your mouth waters; check the sides of the tongue after swallowing | Low to high |
+| Tannin | How much your gums and tongue dry out, plus texture (soft, coarse, fine-grained) | Low to high |
+| Alcohol | Warmth in the throat and chest after swallowing | Low / medium / high |
+| Body | Weight in the mouth: skim milk, whole milk, cream | Light to full |
+| Flavour intensity | How clear the flavours are in the mouth | Light to pronounced |
+| Finish | How long the pleasant flavours last after swallowing | Short to long |
+
+A few tips:
+
+- **Don't confuse sweetness with fruitiness.** Ripe fruit aromas only *feel* sweet; they don't mean there's sugar. Tasting with your nose pinched makes the difference easy to tell.
+- **Judge acidity and tannin separately.** Acid makes your mouth water; tannin dries it out. Both can feel "rough", so first ask whether your mouth is watering or drying.
+- **Measure the finish by how long pleasant flavours linger**, not bitterness or the heat of alcohol. A few seconds is short; more than ten seconds counts as long.
+- On the palate, check whether the aromas from the nose carry through, or whether new ones appear.
+
+</Section>
+
+<Section id="conclusions" title="Step 4, conclusions: quality and when to drink">
+
+Finally, tie the clues together to judge two things: **how good the wine is**, and **when it's best to drink**.
+
+Quality comes down to four questions. Remember them as **BLIC**.
+
+| Question | In a good wine |
+|---|---|
+| **Balance** | No single element (fruit, acid, tannin, alcohol, sugar) sticks out |
+| **Length** | Pleasant flavours linger long after swallowing |
+| **Intensity** | Aromas and flavours are clear, not dull |
+| **Complexity** | Not one aroma, but several clusters layered together |
+
+Depending on how many of the four you can answer "yes" to, you can record quality on a five-step scale: **poor** (out of balance or dull) → **acceptable** (no faults but simple) → **good** (two or three of the four) → **very good** (most of the four) → **outstanding** (excellent on all four). If there's a fault, note it separately before judging quality. Always attach your evidence to the verdict, for example: "Very good. Well balanced with a long finish, with primary and tertiary aromas layered together."
+
+For when to drink, choose one of four boxes.
+
+| Verdict | When |
+|---|---|
+| Too young | Tannins are coarse and the fruit is closed, but intensity and acidity are ample |
+| Can drink now, but has potential for ageing | Enjoyable now, with enough acidity, tannin and intensity to develop further |
+| Drink now; not suitable for further ageing | Its appeal is freshness, or it is already at its peak |
+| Too old | The fruit has faded, leaving only acid or alcohol |
+
+Ageing potential is generally greatest when **acidity, tannin (or sugar) and intensity** are all high together. That's why high-acid Riesling and tannic Nebbiolo last so long. Remember, too, that most wines are made to be drunk fresh.
+
+</Section>
+
+<Section id="worked-example" title="Example: one glass from start to finish">
+
+Let's follow a hypothetical glass to see how the framework works in practice. This example note imagines a **Rioja Reserva** a few years after release.
+
+| Step | Observation |
+|---|---|
+| Appearance | Clear. Medium intensity. Ruby, with a hint of garnet at the rim |
+| Nose | Clean. Medium intensity. Developing. Primary: red cherry, strawberry jam. Secondary: vanilla, coconut, a little clove. Tertiary: leather, dried fig, tobacco leaf |
+| Palate | Dry. Medium-plus acidity. Medium tannin, soft and fine-grained. Medium-plus alcohol. Medium-plus body. Medium-plus flavour intensity. Long finish |
+| Conclusions | Very good. Can drink now, but has potential for ageing for a few more years |
+
+Written out in sentences, the table becomes a note like this.
+
+> Clear, medium ruby with a garnet rim. The clean, medium-intensity nose is developing, showing oak notes of vanilla and coconut and aged notes of leather and dried fig among red cherry and strawberry jam. Dry, with medium-plus acidity and medium, soft tannins. Alcohol and body are medium-plus, flavour intensity is medium-plus, and the finish is long. Acid, fruit and oak are evenly integrated and three aroma clusters are layered, making this a very good wine. Good to drink now, but with enough acidity and concentration to develop for a few more years.
+
+Once the note is done, you can try linking the clues to a region and variety. Coconut and vanilla point to Rioja's tradition of long ageing in American oak; red fruit and medium tannin point to Tempranillo; and the garnet rim and tertiary notes point to the long-aged Reserva category (Chapter 23). But naming the wine in a blind tasting is a bonus. **Accurate observation comes first**, and the conclusion must follow from it.
+
+</Section>
+
+<Checkpoint
+  id="cp-readiness"
+  q="A young red has high acidity and tannin and concentrated fruit, but the tannins feel coarse right now. What is the best conclusion?"
+  choices={['Too old', 'Drink now; no need to wait', 'Too young; great ageing potential', 'It has a fault']}
+  answer={2}
+  explain="Ageing potential is greatest when acidity, tannin and intensity are all high. Coarse tannins soften over time."
+/>
+
+<Section id="course-review" title="Looking back over the whole course">
+
+Let's fold thirty chapters into one page. If anything feels hazy, go back to the chapters in brackets.
+
+| Part | Must remember | Chapters to revisit |
+|---|---|---|
+| Part 1: Getting to know wine | Wine is fermented grape juice. Its structure is sweetness, acidity, tannin, alcohol and body. Phylloxera and the 1976 Judgment of Paris shaped today's wine map. With food, salt and acidity are friends; heat and bitterness need care | Chapters 1–7 |
+| Part 2: How wine is made | Cool climates give acidity; warm climates give alcohol and rich fruit. Yields and canopy drive concentration. White, red and rosé differ in skin contact. Oak, malolactic fermentation and lees create secondary aromas. Old World labels lead with region, New World with variety | Chapters 8–13 |
+| Part 3: Grapes you must know | Whites: Chardonnay, Sauvignon Blanc, Riesling and more. Reds: Cabernet Sauvignon, Merlot, Pinot Noir, Syrah, Grenache. Regional grapes: Sangiovese, Nebbiolo, Tempranillo, Malbec, Zinfandel, Pinotage | Chapters 14–18 |
+| Part 4: Touring the world's regions | Bordeaux blending, Burgundy's vineyards, the Rhône, Loire and Alsace, native grapes of Italy and Iberia, German Riesling, and the New World's variety labels and diverse climates | Chapters 19–28 |
+| Part 5: Special wines and tasting | Sparkling wine traps bubbles, sweet wine concentrates sugar, fortified wine adds spirit. Systematic tasting of appearance, nose, palate and conclusions | Chapters 29–30 |
+
+One idea runs through this whole table: **every flavour in the glass has a reason.** The variety lays the foundation, climate and terroir set the character, and winemaking and ageing add the finishing touches. Systematic tasting is the tool for tracing those reasons backwards.
+
+</Section>
+
+<Section id="recap" title="Key points">
+
+- Systematic tasting is a record of observations that checks **appearance → nose → palate → conclusions** with fixed questions.
+- **Appearance**: clarity, intensity, colour. Whites deepen with age; reds fade.
+- **Nose**: condition, intensity, development, and the aroma clusters: **primary (grape and fermentation), secondary (winemaking), tertiary (ageing)**.
+- **Palate**: sweetness, acidity, tannin, alcohol, body, flavour intensity, finish. Don't confuse sweetness with fruitiness, or acidity with tannin.
+- **Conclusions**: judge quality by **balance, length, intensity and complexity**, and readiness by acidity, tannin and intensity. Always attach evidence to your verdict.
+- Every flavour in the glass has a reason, and tasting is tracing those reasons backwards.
+
+The final quiz draws 15 questions from the whole course. Score 80% or more and you've completed the WineMaster course. Well done!
+
+</Section>
