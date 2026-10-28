@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import ContinueLink from '../../components/ContinueLink';
 import StatusMark from '../../components/StatusMark';
+import HomeGallery from '../../components/HomeGallery.astro';
 import { useT, type Lang } from '../../i18n/ui';
 import { chapters, parts, pick } from '../../data/curriculum';
 import { getCollection } from 'astro:content';
@@ -26,6 +27,8 @@ const ordered = chapters.map((c) => ({ slug: c.slug, href: u(`/${lang}/learn/${c
       <a class="btn" href={u(`/${lang}/wiki/`)}>{t('home.wiki')}</a>
     </div>
   </section>
+
+  <HomeGallery lang={lang} />
 
   <section class="wrap block how">
     <h2>{t('home.how.title')}</h2>
@@ -57,8 +60,8 @@ const ordered = chapters.map((c) => ({ slug: c.slug, href: u(`/${lang}/learn/${c
 </Base>
 
 <style>
-  .hero { padding-top: var(--s8); padding-bottom: var(--s8); display: grid; gap: var(--s5); }
-  @media (min-width: 720px) { .hero { padding-top: 128px; padding-bottom: var(--s9); } }
+  .hero { padding-top: var(--s8); padding-bottom: var(--s7); display: grid; gap: var(--s5); }
+  @media (min-width: 720px) { .hero { padding-top: 128px; padding-bottom: var(--s8); } }
   .hero h1 { max-width: 12em; }
   .how ol { list-style: none; padding: 0; margin: var(--s6) 0 0; display: grid; gap: var(--s5); }
   @media (min-width: 720px) { .how ol { grid-template-columns: repeat(3, 1fr); gap: var(--s6); } }

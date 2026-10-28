@@ -1,0 +1,103 @@
+---
+import { Picture } from 'astro:assets';
+import type { Lang } from '../i18n/ui';
+import vineyard from '../assets/home/vineyard.jpg';
+import cellar from '../assets/home/cellar.jpg';
+import glass from '../assets/home/glass.jpg';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+type L = Record<Lang, string>;
+// Photos: Unsplash License. Credits in src/assets/home/CREDITS.md.
+const shots: { key: string; src: ImageMetadata; label: L; alt: L }[] = [
+  {
+    key: 'vineyard',
+    src: vineyard,
+    label: { ko: '포도밭', en: 'Vineyard', ja: 'ブドウ畑', zh: '葡萄园' },
+    alt: {
+      ko: '해 질 녘 안개 낀 계곡을 내려다보는 독일 라인헤센 언덕의 포도나무 줄',
+      en: 'Rows of vines on a hillside in Rheinhessen, Germany, in golden light over a misty valley',
+      ja: '霧の谷を見下ろす、黄金色の光に包まれたドイツ・ラインヘッセンの丘のブドウの畝',
+      zh: '德国莱茵黑森山坡上的葡萄藤，金色阳光洒向雾气弥漫的山谷',
+    },
+  },
+  {
+    key: 'cellar',
+    src: cellar,
+    label: { ko: '셀러', en: 'Cellar', ja: 'セラー', zh: '酒窖' },
+    alt: {
+      ko: '스페인 아로의 바위를 깎아 만든 셀러 터널, 양옆에 오크통이 줄지어 쌓여 있다',
+      en: 'A dim rock-hewn cellar tunnel in Haro, Spain, lined with stacked oak barrels',
+      ja: '両側にオーク樽が積まれた、スペイン・アロの岩をくり抜いた薄暗いセラー',
+      zh: '西班牙阿罗凿岩而建的昏暗酒窖隧道，两侧堆满橡木桶',
+    },
+  },
+  {
+    key: 'glass',
+    src: glass,
+    label: { ko: '글라스', en: 'Glass', ja: 'グラス', zh: '酒杯' },
+    alt: {
+      ko: '회색 그라데이션 배경 앞, 기울어진 와인잔 속에서 소용돌이치는 레드 와인',
+      en: 'Red wine swirling in a tilted glass against a grey gradient',
+      ja: 'グレーの背景の前、傾いたグラスの中で渦を巻く赤ワイン',
+      zh: '灰色渐变背景前，倾斜酒杯中旋转的红葡萄酒',
+    },
+  },
+];
+---
+
+<section class="wrap gallery" aria-label={shots.map((s) => s.label[lang]).join(' · ')}>
+  {shots.map((s, i) => (
+    <figure class={`shot ${s.key}`}>
+      <Picture
+        src={s.src}
+        alt={s.alt[lang]}
+        formats={['avif', 'webp']}
+        widths={[480, 800, 1200, 1600]}
+        sizes={s.key === 'vineyard' ? '(min-width: 1120px) 640px, (min-width: 720px) 58vw, 100vw' : '(min-width: 1120px) 460px, (min-width: 720px) 42vw, 50vw'}
+        loading={i === 0 ? 'eager' : 'lazy'}
+        fetchpriority={i === 0 ? 'high' : undefined}
+        quality={70}
+      />
+      <figcaption><span class="num">{String(i + 1).padStart(2, '0')}</span> {s.label[lang]}</figcaption>
+    </figure>
+  ))}
+</section>
+
+<style>
+  .gallery {
+    display: grid; gap: var(--s3);
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'vineyard vineyard' 'cellar glass';
+    padding-bottom: var(--s8);
+  }
+  @media (min-width: 720px) {
+    .gallery {
+      gap: var(--s4);
+      grid-template-columns: 1.4fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas: 'vineyard glass' 'cellar glass';
+      padding-bottom: var(--s9);
+    }
+  }
+  .shot { margin: 0; position: relative; overflow: hidden; background: var(--wash); }
+  .vineyard { grid-area: vineyard; aspect-ratio: 16 / 10; }
+  .cellar { grid-area: cellar; aspect-ratio: 4 / 5; }
+  .glass { grid-area: glass; aspect-ratio: 4 / 5; }
+  @media (min-width: 720px) {
+    .vineyard, .cellar { aspect-ratio: 16 / 9; }
+    .glass { aspect-ratio: auto; }
+  }
+  .shot :global(picture), .shot :global(img) { width: 100%; height: 100%; }
+  .shot :global(img) { object-fit: cover; transition: transform 600ms ease; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .shot:hover :global(img) { transform: scale(1.03); }
+  }
+  figcaption {
+    position: absolute; left: 0; bottom: 0;
+    padding: var(--s1) var(--s2); background: #000; color: #fff;
+    font: 500 11px/1.4 var(--sans); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  figcaption .num { color: #9a9a9a; margin-right: var(--s1); }
+</style>
