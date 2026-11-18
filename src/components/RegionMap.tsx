@@ -28,7 +28,8 @@ export default function RegionMap({ points, center, zoom = 6, label, jump }: Pro
     if (!m) return;
     if (i < 0) return overview.current();
     const p = points[i];
-    m.flyTo({ center: [p.coords[1], p.coords[0]], zoom: p.zoom ?? 9, duration: 1200, essential: true });
+    // Pan only: keep the reader's zoom so the surroundings stay in view.
+    m.easeTo({ center: [p.coords[1], p.coords[0]], duration: 900, essential: true });
   };
 
   useEffect(() => {
