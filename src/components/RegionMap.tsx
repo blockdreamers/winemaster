@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
+import type { Feature } from 'geojson';
+import { countryAt } from '../lib/geo';
 
 type Point = { name: string; coords: [number, number]; href?: string; zoom?: number };
 type Props = {
@@ -12,6 +14,26 @@ type Props = {
 
 // Free, keyless vector tiles (OpenStreetMap data). Desaturated in CSS to stay black and white.
 const STYLE = 'https://tiles.openfreemap.org/styles/positron';
+// Natural Earth 1:50m country outlines (public domain, via world-atlas), served from /public.
+const COUNTRIES = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/geo/countries-50m.json`;
+const NO_COUNTRY = ['==', ['get', 'name'], ''] as any;
+
+/** Adds clear country borders, plus layers that dim every country but the chosen one. */
+async function addCountries(m: import('maplibre-gl').Map): Promise<Feature[]> {
+  const [{ feature, mesh }, topo] = await Promise.all([import('topojson-client'), fetch(COUNTRIES).then((r) => r.json())]);
+  const countries = (feature(topo, topo.objects.countries) as any).features as Feature[];
+  // Borders between countries only, so coastlines stay as the base map draws them.
+  const borders = mesh(topo, topo.objects.countries, (a, b) => a !== b);
+  const firstLabel = m.getStyle().layers.find((l) => l.type === 'symbol')?.id;
+  m.addSource('wm-countries', { type: 'geojson', data: { type: 'FeatureCollection', features: countries } });
+  m.addSource('wm-borders', { type: 'geojson', data: borders });
+  const width = (lo: number, hi: number) => ['interpolate', ['linear'], ['zoom'], 3, lo, 9, hi] as any;
+  m.addLayer({ id: 'wm-dim', type: 'fill', source: 'wm-countries', filter: NO_COUNTRY, paint: { 'fill-color': '#000', 'fill-opacity': 0.4 } }, firstLabel);
+  m.addLayer({ id: 'wm-border-casing', type: 'line', source: 'wm-borders', layout: { 'line-join': 'round' }, paint: { 'line-color': '#fff', 'line-width': width(3, 7) } }, firstLabel);
+  m.addLayer({ id: 'wm-border', type: 'line', source: 'wm-borders', layout: { 'line-join': 'round' }, paint: { 'line-color': '#4a4a4a', 'line-width': width(0.9, 2) } }, firstLabel);
+  m.addLayer({ id: 'wm-focus', type: 'line', source: 'wm-countries', filter: NO_COUNTRY, layout: { 'line-join': 'round' }, paint: { 'line-color': '#000', 'line-width': width(1.6, 3.5) } }, firstLabel);
+  return countries;
+}
 
 export default function RegionMap({ points, center, zoom = 6, label, jump }: Props) {
   const el = useRef<HTMLDivElement>(null);
@@ -20,9 +42,23 @@ export default function RegionMap({ points, center, zoom = 6, label, jump }: Pro
   const overview = useRef<() => void>(() => {});
   const [failed, setFailed] = useState(false);
   const [active, setActive] = useState(-1);
+  const countries = useRef<Feature[]>([]);
+  const chosen = useRef(-1);
+
+  /** Dim every country except the one holding the chosen place (none when nothing is chosen). */
+  const shade = () => {
+    const m = mapRef.current;
+    if (!m?.getLayer('wm-dim')) return;
+    const p = points[chosen.current];
+    const name = p && countryAt(countries.current, p.coords[1], p.coords[0]);
+    m.setFilter('wm-dim', name ? ['!=', ['get', 'name'], name] : NO_COUNTRY);
+    m.setFilter('wm-focus', name ? ['==', ['get', 'name'], name] : NO_COUNTRY);
+  };
 
   const go = (i: number) => {
     setActive(i);
+    chosen.current = i;
+    shade();
     pins.current.forEach((n, j) => n.classList.toggle('on', j === i));
     const m = mapRef.current;
     if (!m) return;
@@ -60,6 +96,11 @@ export default function RegionMap({ points, center, zoom = 6, label, jump }: Pro
         });
         map = m;
         mapRef.current = m;
+        m.on('load', () => {
+          addCountries(m)
+            .then((f) => { if (!cancelled) { countries.current = f; shade(); } })
+            .catch(() => { /* borders are a bonus; the map still works without them */ });
+        });
         m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
         m.on('error', () => setFailed((f) => f || !m.isStyleLoaded()));
         // Tiles unreachable (offline, blocked): show the coordinates list instead of a blank box.
