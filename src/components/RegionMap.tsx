@@ -55,8 +55,8 @@ export default function RegionMap({ points, center, zoom = 6, label, jump }: Pro
           center: [lng, lat],
           zoom,
           attributionControl: { compact: true },
-          // Mouse: wheel zooms and drag pans right away. Touch: keep one-finger page scrolling, two fingers move the map.
-          cooperativeGestures: matchMedia('(pointer: coarse)').matches,
+          // Wheel zooms and drag pans right away; on touch, one finger pans and a pinch zooms.
+          cooperativeGestures: false,
         });
         map = m;
         mapRef.current = m;
