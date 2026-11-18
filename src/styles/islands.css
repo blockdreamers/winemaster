@@ -57,7 +57,10 @@
 .map-canvas .maplibregl-canvas { filter: grayscale(1) contrast(1.05); }
 @media (min-width: 720px) { .map-canvas { height: 420px; } }
 @media (prefers-color-scheme: dark) { .map-canvas .maplibregl-canvas { filter: grayscale(1) invert(0.92) contrast(0.9); } }
-.map-fallback { position: absolute; inset: 0; margin: 0; padding: var(--s5); list-style: none; font-size: 14px; }
+.map-fallback {
+  position: absolute; inset: 0; z-index: 3; margin: 0; padding: var(--s5); list-style: none; font-size: 14px;
+  background: var(--wash); overflow-y: auto;
+}
 .map-pin { display: flex; align-items: center; gap: 6px; text-decoration: none; color: #000; }
 .map-pin i { width: 10px; height: 10px; background: #000; outline: 2px solid #fff; }
 .map-pin b { font: 600 12px/1 var(--sans); background: #fff; padding: 3px 5px; border: 1px solid #000; white-space: nowrap; }

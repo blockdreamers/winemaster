@@ -113,7 +113,8 @@ button { font: inherit; color: inherit; }
 .prose strong { color: var(--fg); }
 .prose blockquote { margin: var(--s6) 0; padding: 0 0 0 var(--s5); border-left: 2px solid var(--fg); font-family: var(--serif); font-size: 1.15em; color: var(--fg); }
 .prose table { width: 100%; border-collapse: collapse; font-size: 14px; margin: var(--s5) 0; display: block; overflow-x: auto; }
-.prose th, .prose td { text-align: left; padding: var(--s2) var(--s3) var(--s2) 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.prose th, .prose td { text-align: left; padding: var(--s2) var(--s3) var(--s2) 0; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: normal; word-break: keep-all; }
+/* Keep words whole in table cells; a table wider than the screen scrolls sideways instead. */
 .prose th { font: 500 12px/1.6 var(--mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); border-bottom-color: var(--fg); }
 .prose figure { margin: var(--s6) 0; }
 .prose figcaption { font-size: 13px; color: var(--muted); margin-top: var(--s2); }
