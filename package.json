@@ -15,11 +15,14 @@
     "@astrojs/preact": "^6.1.0",
     "astro": "^7.4.1",
     "maplibre-gl": "^6.15.0",
-    "preact": "^11.0.1"
+    "preact": "^11.0.1",
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
+    "@types/geojson": "7946.0.16",
     "@types/node": "^26.6.5",
+    "@types/topojson-client": "^3.1.5",
     "pagefind": "^1.5.2",
     "typescript": "^6.0.3"
   },
