@@ -51,10 +51,12 @@
 .chapter-bar-fill { position: absolute; inset: 0; background: var(--fg); transform-origin: left; transition: transform 240ms ease; }
 .chapter-bar-text { position: absolute; right: var(--gutter); top: 6px; font-size: 11px; color: var(--muted); background: var(--bg); padding: 0 4px; }
 
-.map { margin: 0; position: relative; border: 1px solid var(--line); background: var(--wash); }
-.map-canvas { height: 320px; filter: grayscale(1) contrast(1.05); }
+.map { --pick: #c8102e; margin: 0; position: relative; border: 1px solid var(--line); background: var(--wash); }
+.map-canvas { height: 320px; }
+/* Grey only the map itself, so pins can carry colour. */
+.map-canvas .maplibregl-canvas { filter: grayscale(1) contrast(1.05); }
 @media (min-width: 720px) { .map-canvas { height: 420px; } }
-@media (prefers-color-scheme: dark) { .map-canvas { filter: grayscale(1) invert(0.92) contrast(0.9); } }
+@media (prefers-color-scheme: dark) { .map-canvas .maplibregl-canvas { filter: grayscale(1) invert(0.92) contrast(0.9); } }
 .map-fallback { position: absolute; inset: 0; margin: 0; padding: var(--s5); list-style: none; font-size: 14px; }
 .map-pin { display: flex; align-items: center; gap: 6px; text-decoration: none; color: #000; }
 .map-pin i { width: 10px; height: 10px; background: #000; outline: 2px solid #fff; }
@@ -64,7 +66,12 @@
 .map-pin.compact b { display: none; }
 .map-pin.compact:hover b, .map-pin.compact.on b, .map-pin.compact.hl b { display: block; }
 .map-pin.compact.on, .map-pin.compact.hl, .map-pin.compact:hover { z-index: 2; }
-.map-pin.compact.on i { width: 14px; height: 14px; }
+.map-pin.compact.on i { width: 14px; height: 14px; background: var(--pick); position: relative; }
+.map-pin.compact.on i::before {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; transform: translate(-50%, -50%);
+  border-radius: 50%; background: rgba(200, 16, 46, 0.18); border: 2px solid var(--pick); pointer-events: none;
+}
+.map-pin.compact.on b { color: var(--pick); border-color: var(--pick); }
 .map-jump .map-places {
   display: flex; flex-wrap: wrap; gap: var(--s2); padding: var(--s3); border-top: 1px solid var(--line); background: var(--bg);
 }
