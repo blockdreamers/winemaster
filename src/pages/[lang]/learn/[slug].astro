@@ -115,7 +115,7 @@ const quizLabels = {
 </Base>
 
 <style>
-  .layout { display: grid; gap: var(--s5); padding-top: var(--s7); }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); padding-top: var(--s7); }
   @media (min-width: 1024px) { .layout { grid-template-columns: 220px minmax(0, 1fr); gap: var(--s8); padding-top: var(--s8); } }
   .toc { font-size: 13px; }
   .toc ol { display: none; }

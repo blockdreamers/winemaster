@@ -94,9 +94,15 @@ const nav = [
 <style>
   .site-header {
     position: sticky; top: 0; z-index: 50; height: var(--header);
+    border-bottom: 1px solid var(--line);
+  }
+  /* The blur sits on a pseudo-element, not the header itself: on iOS Safari a backdrop-filter
+     turns the header into the containing block for fixed children, which squeezed the mobile
+     menu to zero height and let the page (maps included) show through it. */
+  .site-header::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     backdrop-filter: saturate(1.2) blur(8px); -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
   }
   .bar { height: 100%; display: flex; align-items: center; gap: var(--s5); }
   .logo { font: 600 17px/1 var(--serif); letter-spacing: -0.02em; color: var(--fg); text-decoration: none; margin-right: auto; }
@@ -127,8 +133,13 @@ const nav = [
   .menu[open] .burger::after { transform: translateY(-6px) rotate(-45deg); }
   .menu nav {
     position: fixed; left: 0; right: 0; top: var(--header); bottom: 0;
-    background: var(--bg); padding: var(--s5) var(--gutter); display: flex; flex-direction: column;
+    height: calc(100dvh - var(--header)); z-index: 60;
+    background: var(--bg); padding: var(--s5) var(--gutter) calc(var(--s5) + env(safe-area-inset-bottom));
+    display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain;
   }
+  .menu nav a { flex-shrink: 0; }
+  :global(html:has(.menu[open])) { overflow: hidden; }
+  .lang ul { z-index: 60; }
   .menu nav a { font: 600 28px/1.2 var(--serif); color: var(--fg); padding: var(--s4) 0; border-bottom: 1px solid var(--line); }
 
   .site-footer { border-top: 1px solid var(--line); margin-top: var(--s9); padding: var(--s6) 0 calc(var(--s6) + env(safe-area-inset-bottom)); }
