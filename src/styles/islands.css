@@ -59,6 +59,23 @@
 .map-pin { display: flex; align-items: center; gap: 6px; text-decoration: none; color: #000; }
 .map-pin i { width: 10px; height: 10px; background: #000; outline: 2px solid #fff; }
 .map-pin b { font: 600 12px/1 var(--sans); background: #fff; padding: 3px 5px; border: 1px solid #000; white-space: nowrap; }
+.map-frame { position: relative; }
+.map-pin.compact { cursor: pointer; }
+.map-pin.compact b { display: none; }
+.map-pin.compact:hover b, .map-pin.compact.on b, .map-pin.compact.hl b { display: block; }
+.map-pin.compact.on, .map-pin.compact.hl, .map-pin.compact:hover { z-index: 2; }
+.map-pin.compact.on i { width: 14px; height: 14px; }
+.map-jump .map-places {
+  display: flex; flex-wrap: wrap; gap: var(--s2); padding: var(--s3); border-top: 1px solid var(--line); background: var(--bg);
+}
+.map-hint { width: 100%; font-size: 12px; color: var(--muted); }
+.map-places button {
+  min-height: 36px; padding: 0 var(--s3); border: 1px solid var(--line); background: transparent; color: var(--fg);
+  font: 500 13px/1 var(--sans); cursor: pointer; border-radius: 0;
+}
+.map-places button:hover { border-color: var(--fg); }
+.map-wiki { width: 100%; font-size: 13px; font-weight: 600; margin-top: var(--s1); }
+.map-places button.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 .maplibregl-ctrl-group { border-radius: 0 !important; box-shadow: none !important; border: 1px solid #000; }
 
 .search-input {

@@ -5,6 +5,8 @@ import Section from '../../../components/Section.astro';
 import Checkpoint from '../../../components/Checkpoint.astro';
 import Quiz from '../../../components/Quiz';
 import ChapterBar from '../../../components/ChapterBar';
+import RegionMap from '../../../components/RegionMap';
+import { chapterMaps } from '../../../data/chapterMaps';
 import { langs, useT, type Lang } from '../../../i18n/ui';
 import { chapters, parts, pick, type ChapterMeta } from '../../../data/curriculum';
 import { localized } from '../../../lib/content';
@@ -36,6 +38,9 @@ if (found) {
   regionNames = (await Promise.all(rel.regions.map(async (s) => ({ slug: s, name: (await localized('regions', s, lang))?.entry.data.name ?? s }))));
   grapeNames = (await Promise.all(rel.grapes.map(async (s) => ({ slug: s, name: (await localized('grapes', s, lang))?.entry.data.name ?? s }))));
 }
+const mapPoints = (chapterMaps[meta.n] ?? []).map((p) => ({
+  name: p.name[lang], coords: p.coords, zoom: p.zoom, href: p.wiki ? u(`/${lang}/wiki/regions/${p.wiki}/`) : undefined,
+}));
 const title = found?.entry.data.title ?? pick(meta.title, lang);
 const quizLabels = {
   start: t('quiz.start'), check: t('quiz.check'), next: t('quiz.next'), finish: t('quiz.finish'),
@@ -65,6 +70,14 @@ const quizLabels = {
       </header>
 
       {found?.fallback && <p class="note">{t('chapter.fallback')}</p>}
+
+      {mapPoints.length > 0 && (
+        <section class="ch-map" aria-labelledby="ch-map-title" data-pagefind-ignore>
+          <p class="eyebrow" id="ch-map-title">{t('chapter.map')}</p>
+          <RegionMap client:visible points={mapPoints} zoom={5} label={t('chapter.map')}
+            jump={{ all: t('chapter.map.all'), hint: t('chapter.map.hint'), wiki: t('chapter.map.wiki') }} />
+        </section>
+      )}
 
       {found ? (
         <div class="prose">
@@ -118,6 +131,7 @@ const quizLabels = {
   .body :global(.ch-section > h2) { margin-top: var(--s8); }
   .body :global(.ch-section:first-child > h2) { margin-top: 0; }
   .body :global(.ch-section-end) { margin-top: var(--s5); }
+  .ch-map { display: grid; gap: var(--s3); margin-bottom: var(--s7); }
   .quiz-wrap { max-width: var(--measure); margin-top: var(--s8); padding-top: var(--s6); border-top: 2px solid var(--fg); }
   .related { max-width: var(--measure); margin-top: var(--s7); display: grid; gap: var(--s3); }
   .pager { max-width: var(--measure); margin-top: var(--s8); display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); border-top: 1px solid var(--fg); }
